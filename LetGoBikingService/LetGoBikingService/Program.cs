@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Let_s_Go_Biking
+namespace LetGoBikingService
 {
     internal class Program
     {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{546A88E8-F05A-4217-BED8-C3D8E51979CC}</ProjectGuid>
+    <ProjectGuid>{FBF06968-3D0A-4268-A8F3-5D0731464905}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Let_s_Go_Biking</RootNamespace>
-    <AssemblyName>Let%27s Go Biking</AssemblyName>
+    <RootNamespace>LetGoBikingService</RootNamespace>
+    <AssemblyName>LetGoBikingService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
