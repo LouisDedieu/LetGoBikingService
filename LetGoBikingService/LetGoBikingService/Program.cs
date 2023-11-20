@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using LetGoBikingService.Services;
@@ -17,15 +11,15 @@ namespace LetGoBikingService
         static void Main(string[] args)
         {
             // Définir l'URL de base pour le service
-            Uri baseAddress = new Uri("http://localhost:8090/RoutingService");
+            Uri baseAddress = new Uri("http://localhost:8090/StationsService");
 
-            // Créer une instance de ServiceHost
-            using (ServiceHost host = new ServiceHost(typeof(RouteService), baseAddress))
+            // Créer une instance de ServiceHost pour StationsService
+            using (ServiceHost host = new ServiceHost(typeof(StationsService), baseAddress))
             {
                 try
                 {
                     // Ajouter un point de terminaison au service
-                    host.AddServiceEndpoint(typeof(IRouteService), new WSHttpBinding(), "RoutingService");
+                    host.AddServiceEndpoint(typeof(IStationsService), new WSHttpBinding(), "");
 
                     // Activer l'échange de métadonnées
                     ServiceMetadataBehavior smb = new ServiceMetadataBehavior
@@ -36,7 +30,7 @@ namespace LetGoBikingService
 
                     // Démarrer le service
                     host.Open();
-                    Console.WriteLine("Le service est démarré à : " + baseAddress);
+                    Console.WriteLine("Le service StationsService est démarré à : " + baseAddress);
 
                     // Attendre que l'utilisateur appuie sur une touche pour arrêter le service
                     Console.WriteLine("Appuyez sur <Enter> pour arrêter le service...");
@@ -54,4 +48,3 @@ namespace LetGoBikingService
         }
     }
 }
-
