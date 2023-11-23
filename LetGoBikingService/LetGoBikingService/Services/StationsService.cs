@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 public class StationsService : IStationsService
 {
-    private readonly JCDecauxAPI jcDecauxService;
 
-    public StationsService(JCDecauxAPI jcDecauxService)
+    public async Task<List<Station>> GetStationsAsync(string contractName)
     {
-        this.jcDecauxService = jcDecauxService;
+        return await JCDecauxAPI.GetStationsAsync(contractName);
     }
 
-    public async Task<IEnumerable<Station>> GetStationsAsync(string contractName)
+    public async Task<Station> FindNearestStation(string address)
     {
-        return await jcDecauxService.GetStationsAsync(contractName);
+        return await JCDecauxAPI.FindNearestStation();
     }
+
 }
