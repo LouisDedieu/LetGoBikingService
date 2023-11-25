@@ -50,15 +50,14 @@ namespace LetGoBikingService
 
             Console.WriteLine("StationsService is hosted at " + DateTime.Now.ToString());
             Console.WriteLine("ContractService is hosted at " + DateTime.Now.ToString());
+            Console.WriteLine("RouteService is hosted at " + DateTime.Now.ToString());
             Console.WriteLine("Hosts are running... Press <Enter> key to stop");
 
-/*            List<Station> stations = await JCDecauxAPI.GetStationsAsync("lyon");
-            CoordinateNominatim coordinateOrigin = await OpenStreetMapAPI.GetCoordinates("5 rue Félix Rollet");
-            Console.WriteLine("calling FIndneareststation");
+            String[] addressOrigin = { "lyon", "place bellecour" };
+            String[] addressDestination = { "lyon", "5 rue Félix Rollet" };
 
-            Station s = StationsService.FindNearestStation(stations, coordinateOrigin);
-
-            Console.WriteLine(s.name);*/
+            RouteService rs = new RouteService();
+            await rs.GetItinerary(addressOrigin[1], addressDestination[1]);
 
             Console.ReadLine();
         }

@@ -12,21 +12,31 @@ namespace LetGoBikingService.Services
     public class RouteService : IRouteService
     {
         private List<Contract> contracts = JCDecauxAPI.GetContractsAsync().GetAwaiter().GetResult();
+        private Contract contractNearestOrigin;
+        private Contract contractNearestDestination;
 
-        public async Task<Itinerary> GetItinerary(string origin, string destination)
+        private List<Station> stationsNearestOrigin;
+        private List<Station> stationsNearestDestination;
+        private List<Station> stationsSelected = new List<Station>();
+
+        private CoordinateNominatim coordinateOrigin;
+        private CoordinateNominatim coordinateDestination;
+
+        public async Task<string> GetItinerary(string origin, string destination)
         {
             /*            Contract contractNearestOrigin = await JCDecauxAPI.GetContractUsingCityNameAsync("Marseille");
                         Contract contractNearestDestination = await JCDecauxAPI.GetContractUsingCityNameAsync("Lyon");*/
-            Contract contractNearestOrigin = await FindNearestContract(origin);
-            Contract contractNearestDestination = await FindNearestContract(destination);
+            contractNearestOrigin = await FindNearestContract(origin);
+            contractNearestDestination = await FindNearestContract(destination);
 
-            List<Station> stationsNearestOrigin = await JCDecauxAPI.GetStationsAsync(contractNearestOrigin.name);
-            List<Station> stationsNearestDestination = await JCDecauxAPI.GetStationsAsync(contractNearestDestination.name);
+            stationsNearestOrigin = await JCDecauxAPI.GetStationsAsync(contractNearestOrigin.name);
+            stationsNearestDestination = await JCDecauxAPI.GetStationsAsync(contractNearestDestination.name);
 
-            CoordinateNominatim coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
-            CoordinateNominatim coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);
+            coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
+            Console.WriteLine($"{coordinateOrigin.LongitudeNominatim},{coordinateOrigin.LatitudeNominatim}");
 
-            List<Station> stationsSelected = new List<Station>();
+            coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);
+            Console.WriteLine($"{coordinateDestination.LongitudeNominatim},{coordinateOrigin.LatitudeNominatim}");
 
             if (stationsNearestOrigin.Count != 0)
             {
@@ -41,15 +51,34 @@ namespace LetGoBikingService.Services
                 Console.WriteLine($"Station la plus proche de l'addresse de destination : {stationNearestDestination.name}");
             }
 
-             Console.WriteLine($"Is it worth to use them ? {isItWorthToUseStations(stationsSelected, coordinateOrigin, coordinateDestination)}");
+            bool WithOrWithoutBike = isItWorthToUseStations(stationsSelected, coordinateOrigin, coordinateDestination);
+            Console.WriteLine($"Is it worth to use them ? {WithOrWithoutBike}");
 
-            // Implémentez la logique pour créer et retourner un itinéraire.
-            return new Itinerary
+            string itineraire = await ComputeItinary(WithOrWithoutBike);
+            return itineraire;
+        }
+
+        private async Task<string> ComputeItinary(bool withOrWithoutBike)
+        {
+            if (withOrWithoutBike && stationsSelected.Count >= 2)
             {
-                StartLocation = origin,
-                EndLocation = destination
-                // Initialisez les autres propriétés...
-            };
+                // Calculer l'itinéraire à pied jusqu'à la première station
+                var walkToFirstStation = await OpenRouteAPI.GetDirections(coordinateOrigin, stationsSelected.First().position, "foot-walking");
+
+                // Calculer l'itinéraire à vélo entre les deux stations
+                var bikeRoute = await OpenRouteAPI.GetDirections(stationsSelected.First().position, stationsSelected.Last().position, "cycling-regular");
+
+                // Calculer l'itinéraire à pied de la dernière station à la destination
+                var walkToDestination = await OpenRouteAPI.GetDirections(stationsSelected.Last().position, coordinateDestination, "foot-walking");
+
+                // Combinez ces segments pour former un itinéraire complet
+                return $"{walkToFirstStation}\n{bikeRoute}\n{walkToDestination}";
+            }
+            else
+            {
+                // Itinéraire à pied complet si le vélo n'est pas une option valable
+                return await OpenRouteAPI.GetDirections(coordinateOrigin, coordinateDestination, "foot-walking");
+            }
         }
 
         private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
@@ -61,7 +90,6 @@ namespace LetGoBikingService.Services
 
             return distanceWithStations < GetDistanceTo(coordinateOrigin, coordinateDestination);
         }
-
 
         public async Task<Contract> FindNearestContract(string address)
         {

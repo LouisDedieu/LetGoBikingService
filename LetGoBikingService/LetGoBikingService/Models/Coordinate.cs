@@ -50,12 +50,19 @@ namespace LetGoBikingService.Models
 
     public class CoordinateNominatim
     {
+        public CoordinateNominatim() { }
+
+        public CoordinateNominatim(string startLng, string startLat)
+        {
+            LongitudeNominatim = startLng;
+            LatitudeNominatim = startLat;
+        }
+
         [JsonPropertyName("lat")]
-        [DataMember]
         public string LatitudeNominatim { get; set; }
 
         [JsonPropertyName("lon")]
-        [DataMember]
         public string LongitudeNominatim { get; set; }
     }
+
 }
