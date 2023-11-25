@@ -53,11 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IContractService.cs" />
-    <Compile Include="Interfaces\IStationsService.cs" />
     <Compile Include="Interfaces\IRouteService.cs" />
+    <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\Itinerary.cs" />
     <Compile Include="Models\Station .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

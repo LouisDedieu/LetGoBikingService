@@ -10,6 +10,12 @@ namespace LetGoBikingService.Models
     {
         public Position() { }
 
+        public Position(double lat, double lon)
+        {
+            this.latitude = lat;
+            this.longitude = lon;
+        }
+
         [JsonPropertyName("lat")]
         [DataMember]
         public double latitude { get; set; }
@@ -18,6 +24,7 @@ namespace LetGoBikingService.Models
         [DataMember]
         public double longitude { get; set; }
 
+        private double R = 6371e3;
         internal double GetDistanceTo(CoordinateNominatim coordinateNominatim)
         {
             //Conversion de string en double
@@ -27,7 +34,6 @@ namespace LetGoBikingService.Models
                 throw new ArgumentException("La conversion des coordonnées d'origine en double a échoué.");
             }
 
-            var R = 6371e3; // Rayon de la Terre en mètres
 
             var lat1 = this.latitude * Math.PI / 180; // Convertit en radians
             lat2 = lat2 * Math.PI / 180;
@@ -41,7 +47,7 @@ namespace LetGoBikingService.Models
 
             var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
-            return R * c; // Distance en mètres
+            return this.R * c; // Distance en mètres
 
         }
     }
@@ -63,6 +69,18 @@ namespace LetGoBikingService.Models
 
         [JsonPropertyName("lon")]
         public string LongitudeNominatim { get; set; }
+
+        public double GetDistanceTo(CoordinateNominatim contractCoordinates)
+        {
+            //Conversion de string en double
+            if (!double.TryParse(this.LatitudeNominatim, NumberStyles.Any, CultureInfo.InvariantCulture, out double lat) ||
+                !double.TryParse(this.LongitudeNominatim, NumberStyles.Any, CultureInfo.InvariantCulture, out double lon))
+            {
+                throw new ArgumentException("La conversion des coordonnées d'origine en double a échoué.");
+            }
+            Position position = new Position(lat, lon);
+            return position.GetDistanceTo(contractCoordinates);
+        }
     }
 
 }

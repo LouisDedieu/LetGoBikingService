@@ -1,25 +1,11 @@
-﻿using LetGoBikingService;
-using LetGoBikingService.Interfaces;
-using LetGoBikingService.Models;
-using LetGoBikingService.Services;
+﻿using LetGoBikingService.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-public class StationsService : IStationsService
+
+public class StationsService
 {
-
-    public async Task<List<Station>> GetStationsAsync(string contractName)
-    {
-        return await JCDecauxAPI.GetStationsAsync(contractName);
-    }
-
     public static Station FindNearestStation(List<Station> stations, CoordinateNominatim coordinateNominatim)
     {
-        HttpClient httpClient = new HttpClient();
         try
         {
             Station nearestStation = null;
