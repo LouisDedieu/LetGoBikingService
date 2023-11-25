@@ -27,8 +27,4 @@ public class Contract
 
     [DataMember]
     public string[] cities { get; set; }
-
-    [DataMember]
-    public LetGoBikingService.Models.Position position { get; set; }
-
 }

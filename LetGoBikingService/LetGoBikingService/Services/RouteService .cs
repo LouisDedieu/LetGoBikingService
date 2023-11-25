@@ -11,8 +11,38 @@ namespace LetGoBikingService.Services
 {
     public class RouteService : IRouteService
     {
-        public Itinerary GetItinerary(string origin, string destination)
+        private List<Contract> contracts = JCDecauxAPI.GetContractsAsync().GetAwaiter().GetResult();
+
+        public async Task<Itinerary> GetItinerary(string origin, string destination)
         {
+            /*            Contract contractNearestOrigin = await JCDecauxAPI.GetContractUsingCityNameAsync("Marseille");
+                        Contract contractNearestDestination = await JCDecauxAPI.GetContractUsingCityNameAsync("Lyon");*/
+            Contract contractNearestOrigin = await FindNearestContract(origin);
+            Contract contractNearestDestination = await FindNearestContract(destination);
+
+            List<Station> stationsNearestOrigin = await JCDecauxAPI.GetStationsAsync(contractNearestOrigin.name);
+            List<Station> stationsNearestDestination = await JCDecauxAPI.GetStationsAsync(contractNearestDestination.name);
+
+            CoordinateNominatim coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
+            CoordinateNominatim coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);
+
+            List<Station> stationsSelected = new List<Station>();
+
+            if (stationsNearestOrigin.Count != 0)
+            {
+                Station stationNearestOrigin = StationsService.FindNearestStation(stationsNearestOrigin, coordinateOrigin);
+                stationsSelected.Add(stationNearestOrigin);
+                Console.WriteLine($"Station la plus proche de l'addresse d'origine : {stationNearestOrigin.name}");
+            }
+            if (stationsNearestDestination.Count != 0)
+            {
+                Station stationNearestDestination = StationsService.FindNearestStation(stationsNearestDestination, coordinateDestination);
+                stationsSelected.Add(stationNearestDestination);
+                Console.WriteLine($"Station la plus proche de l'addresse de destination : {stationNearestDestination.name}");
+            }
+
+             Console.WriteLine($"Is it worth to use them ? {isItWorthToUseStations(stationsSelected, coordinateOrigin, coordinateDestination)}");
+
             // Implémentez la logique pour créer et retourner un itinéraire.
             return new Itinerary
             {
@@ -21,22 +51,32 @@ namespace LetGoBikingService.Services
                 // Initialisez les autres propriétés...
             };
         }
-        public async Task<Contract> FindNearestContract(string origin)
+
+        private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
+        {
+            if (stations.Count < 2) return false;
+
+            double distanceWithStations = stations.First().position.GetDistanceTo(coordinateOrigin) +
+                                          stations.Last().position.GetDistanceTo(coordinateDestination);
+
+            return distanceWithStations < GetDistanceTo(coordinateOrigin, coordinateDestination);
+        }
+
+
+        public async Task<Contract> FindNearestContract(string address)
         {
             Contract nearestContract = null;
             double minDistance = double.MaxValue;
 
-            CoordinateNominatim originCoordinate = await OpenStreetMapAPI.GetCoordinates(origin);
-            List<Contract> contracts = await JCDecauxAPI.GetContractsAsync();
+            CoordinateNominatim addressCoordinate = await OpenStreetMapAPI.GetCoordinates(address);
 
-
-            foreach (Contract contract in contracts)
+            foreach (Contract contract in this.contracts)
             {
                 //Contract named jcdecauxbike and besancon are null
                 if (contract.name == "jcdecauxbike" || contract.name == "besancon") continue;
 
                 CoordinateNominatim contractCoordinates = await OpenStreetMapAPI.GetCoordinates(contract.name);
-                double distance = GetDistanceTo(originCoordinate, contractCoordinates);
+                double distance = GetDistanceTo(addressCoordinate, contractCoordinates);
 
                 if (distance < minDistance)
                 {

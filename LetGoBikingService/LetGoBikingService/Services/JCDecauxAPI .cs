@@ -61,28 +61,6 @@ namespace LetGoBikingService
             }
         }
 
-        public static async Task<Contract> GetContractUsingContractNameAsync(string contractName)
-        {
-            HttpClient httpClient = new HttpClient();
-            try
-            {
-                contractName = contractName.ToLower();
-                string url = $"https://api.jcdecaux.com/vls/v3/stations/2010?contract={contractName}&apiKey=07a62d74ecdd34da4bfa4e0cc2d7968398aa3110";
-                HttpResponseMessage response = await httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                Contract c = JsonSerializer.Deserialize<Contract>(responseBody);
-                return c;
-            }
-            catch (Exception ex)
-            {
-                // Gérer l'exception ici (log, throw, etc.)
-                Console.WriteLine($"Erreur lors de la récupération du contract : {ex.Message}");
-                return null;
-            }
-        }
-
         public static async Task<List<Contract>> GetContractsAsync()
         {
             HttpClient httpClient = new HttpClient();
@@ -103,45 +81,6 @@ namespace LetGoBikingService
             }
         }
 
-        public static async Task<Station> FindNearestStation()
-        {
-            HttpClient httpClient = new HttpClient();
-            try
-            {
-                Position addressCoordinates = new Position(45.3, 4.863);
-/*                string url = $"https://api.jcdecaux.com/vls/v3/stations?apiKey={apiKey}";
-                Console.WriteLine(url);
-                var response = await httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                var responseBody = await response.Content.ReadAsStringAsync();*/
-                var stations = await GetStationsAsync("lyon");
-
-                Station nearestStation = null;
-                double minDistance = double.MaxValue;
-
-                foreach (Station station in stations)
-                {
-                    Console.WriteLine(station.name);
-                    var stationCoordinates = new Position(station.position.lat, station.position.lng);
-                    double distance = stationCoordinates.GetDistanceTo(addressCoordinates);
-
-                    if (distance < minDistance)
-                    {
-                        minDistance = distance;
-                        nearestStation = station;
-                    }
-                }
-
-                return nearestStation;
-            }
-
-            catch (Exception ex)
-            {
-                // Gérer l'exception ici (log, throw, etc.)
-                Console.WriteLine($"Erreur lors de la récupération du contract : {ex.Message}");
-                return null;
-            }
-        }
 
     }
 }

@@ -14,6 +14,6 @@ namespace LetGoBikingService.Interfaces
     public interface IRouteService
     {
         [OperationContract]
-        Itinerary GetItinerary(string origin, string destination);
+        Task<Itinerary> GetItinerary(string origin, string destination);
     }
 }
