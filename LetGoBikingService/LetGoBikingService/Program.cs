@@ -17,11 +17,14 @@ namespace LetGoBikingService
             //Create ServiceHost
             ServiceHost hostRoute = new ServiceHost(typeof(RouteService), baseAddressRoute);
 
-            // Multiple end points can be added to the Service using AddServiceEndpoint() method.
-            // Host.Open() will run the service, so that it can be used by any client.
-
+            // Créer une instance de WSHttpBinding avec une taille maximale de message augmentée
+            WSHttpBinding binding = new WSHttpBinding
+            {
+                MaxReceivedMessageSize = int.MaxValue, // Taille maximale des messages entrants
+                ReaderQuotas = { MaxArrayLength = int.MaxValue, MaxStringContentLength = int.MaxValue } // Ajuster si nécessaire
+            };
             //Add a service endpoint
-            hostRoute.AddServiceEndpoint(typeof(IRouteService), new WSHttpBinding(), "");
+            hostRoute.AddServiceEndpoint(typeof(IRouteService), binding, "");
 
             //Enable metadata exchange
             ServiceMetadataBehavior smbRoute = new ServiceMetadataBehavior();

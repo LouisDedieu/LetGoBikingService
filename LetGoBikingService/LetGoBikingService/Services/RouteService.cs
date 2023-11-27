@@ -25,7 +25,7 @@ namespace LetGoBikingService.Services
 
         private LocationService locationService = new LocationService();
 
-        public async Task<string> GetItinerary(string origin, string destination)
+        public async Task<Itinary> GetItinerary(string origin, string destination)
         {
             ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
 
@@ -43,9 +43,6 @@ namespace LetGoBikingService.Services
             coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
             coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);
 
-            Console.WriteLine(contracts.Length);
-            Console.WriteLine(contractsCoordinates.Count());
-
             contractNearestOrigin = locationService.FindNearestContract(coordinateOrigin, contracts, contractsCoordinates);
             contractNearestDestination = locationService.FindNearestContract(coordinateDestination, contracts, contractsCoordinates);
 
@@ -53,9 +50,6 @@ namespace LetGoBikingService.Services
             stationsNearestDestination = contractNearestOrigin.Equals(contractNearestDestination)
                                          ? stationsNearestOrigin
                                          : proxyServiceClient.GetListStations(contractNearestDestination.name);
-
-
-
 
             if (stationsNearestOrigin.Count() != 0)
             {
@@ -73,25 +67,29 @@ namespace LetGoBikingService.Services
             bool WithOrWithoutBike = isItWorthToUseStations(stationsSelected, coordinateOrigin, coordinateDestination);
             Console.WriteLine($"Is it worth to use them ? {WithOrWithoutBike}");
 
-            string itineraire = await ComputeItinary(WithOrWithoutBike);
+            Itinary itineraire = await ComputeItinary(WithOrWithoutBike);
             return itineraire;
         }
 
-        private async Task<string> ComputeItinary(bool withOrWithoutBike)
+        private async Task<Itinary> ComputeItinary(bool withOrWithoutBike)
         {
             if (withOrWithoutBike && stationsSelected.Count >= 2)
             {
+                List<Itinary> itinaries = new List<Itinary>();
                 // Calculer l'itinéraire à pied jusqu'à la première station
-                var walkToFirstStation = await OpenRouteAPI.GetDirections(coordinateOrigin, stationsSelected.First().position, "foot-walking");
+                Itinary walkToFirstStation = await OpenRouteAPI.GetDirections(coordinateOrigin, stationsSelected.First().position, "foot-walking");
+                itinaries.Add(walkToFirstStation);
 
                 // Calculer l'itinéraire à vélo entre les deux stations
-                var bikeRoute = await OpenRouteAPI.GetDirections(stationsSelected.First().position, stationsSelected.Last().position, "cycling-regular");
+                Itinary bikeRoute = await OpenRouteAPI.GetDirections(stationsSelected.First().position, stationsSelected.Last().position, "cycling-regular");
+                itinaries.Add(bikeRoute);
 
                 // Calculer l'itinéraire à pied de la dernière station à la destination
-                var walkToDestination = await OpenRouteAPI.GetDirections(stationsSelected.Last().position, coordinateDestination, "foot-walking");
+                Itinary walkToDestination = await OpenRouteAPI.GetDirections(stationsSelected.Last().position, coordinateDestination, "foot-walking");
+                itinaries.Add(walkToDestination);
 
                 // Combinez ces segments pour former un itinéraire complet
-                return $"{walkToFirstStation}\n{bikeRoute}\n{walkToDestination}";
+                return CombineItinaries(itinaries);
             }
             else
             {
@@ -99,6 +97,23 @@ namespace LetGoBikingService.Services
                 return await OpenRouteAPI.GetDirections(coordinateOrigin, coordinateDestination, "foot-walking");
             }
         }
+
+        public static Itinary CombineItinaries(List<Itinary> itinaries)
+        {
+            Itinary combinedItinary = new Itinary { Features = new List<Feature>() };
+
+            foreach (Itinary itinary in itinaries)
+            {
+                foreach (Feature feature in itinary.Features)
+                {
+                    // Ajouter les caractéristiques de chaque itinéraire dans l'itinéraire combiné
+                    combinedItinary.Features.Add(feature);
+                }
+            }
+
+            return combinedItinary;
+        }
+
 
         private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
         {
@@ -110,5 +125,4 @@ namespace LetGoBikingService.Services
             return distanceWithStations < locationService.GetDistanceTo(coordinateOrigin, coordinateDestination);
         }
     }
-
 }

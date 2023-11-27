@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Interfaces\IRouteService.cs" />
     <Compile Include="Models\CoordinateNominatim.cs" />
+    <Compile Include="Models\Itinary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService.cs" />
