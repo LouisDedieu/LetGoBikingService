@@ -35,11 +35,11 @@ namespace LetGoBikingService
             Console.WriteLine("RouteService is hosted at " + DateTime.Now.ToString());
             Console.WriteLine("Hosts are running... Press <Enter> key to stop");
 
-/*            String[] addressOrigin = { "lyon", "place bellecour" };
+            String[] addressOrigin = { "lyon", "place bellecour" };
             String[] addressDestination = { "lyon", "5 rue Félix Rollet" };
 
             RouteService rs = new RouteService();
-            await rs.GetItinerary(addressOrigin[1], addressDestination[1]);*/
+            await rs.GetItinerary(addressOrigin[1], addressDestination[1]);
 
             Console.ReadLine();
         }

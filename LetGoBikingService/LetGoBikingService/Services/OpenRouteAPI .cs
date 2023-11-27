@@ -1,4 +1,5 @@
 ﻿using LetGoBikingService.Models;
+using LetGoBikingService.ServiceReference1;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -41,7 +42,6 @@ namespace LetGoBikingService.Services
             string startLat = Convert.ToString(start.latitude).Replace(',', '.');
 
             CoordinateNominatim coord = new CoordinateNominatim(startLng, startLat);
-
             return await GetDirections(coord, end, profile);
         }
 

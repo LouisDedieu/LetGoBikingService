@@ -1,4 +1,4 @@
-﻿using LetGoBikingService.Models;
+﻿using LetGoBikingService.ServiceReference1;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

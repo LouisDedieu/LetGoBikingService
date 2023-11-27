@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace LetGoBikingService.Models
+namespace ProxyCacheSOAP.Models
 {
     [DataContract]
     public class Station
@@ -13,11 +13,6 @@ namespace LetGoBikingService.Models
         public Position position { get; set; }
         [DataMember]
         public double available_bikes { get; set; }
-
-        internal bool hasAvailableBike()
-        {
-            return available_bikes > 0;
-        }
     }
 }
 

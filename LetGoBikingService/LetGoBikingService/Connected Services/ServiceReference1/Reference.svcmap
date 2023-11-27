@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="054d9775-27ad-47d0-8752-a1fb4f1e225f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8091/ProxyCacheSOAP/Service1?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="92032606-167d-4989-b835-1d05afcc35ad" SourceId="1" SourceUrl="http://localhost:8091/ProxyCacheSOAP/Service1?xsd=xsd1" />
+    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="c52cb32d-392b-45bb-8338-37787fa8bb45" SourceId="1" SourceUrl="http://localhost:8091/ProxyCacheSOAP/Service1?xsd=xsd2" />
+    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="3f0df960-3305-4fd0-bd48-183643958c39" SourceId="1" SourceUrl="http://localhost:8091/ProxyCacheSOAP/Service1?xsd=xsd3" />
+    <MetadataFile FileName="ProxyService.wsdl" MetadataType="Wsdl" ID="9ca83eaf-e99b-443c-b0b6-a3d8cad712ec" SourceId="1" SourceUrl="http://localhost:8091/ProxyCacheSOAP/Service1?wsdl" />
+    <MetadataFile FileName="Service13.xsd" MetadataType="Schema" ID="75c6eb86-c152-44ee-9981-c877974f3408" SourceId="1" SourceUrl="http://localhost:8091/ProxyCacheSOAP/Service1?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

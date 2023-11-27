@@ -1,51 +1,68 @@
 ﻿using LetGoBikingService.Interfaces;
 using LetGoBikingService.Models;
+using LetGoBikingService.ServiceReference1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace LetGoBikingService.Services
 {
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
+
     public class RouteService : IRouteService
     {
         private Contract contractNearestOrigin;
         private Contract contractNearestDestination;
 
-        private List<Station> stationsNearestOrigin;
-        private List<Station> stationsNearestDestination;
+        private Station[] stationsNearestOrigin;
+        private Station[] stationsNearestDestination;
         private List<Station> stationsSelected = new List<Station>();
 
         private CoordinateNominatim coordinateOrigin;
         private CoordinateNominatim coordinateDestination;
 
-        private ContractService contractService = new ContractService();
+        private LocationService locationService = new LocationService();
 
         public async Task<string> GetItinerary(string origin, string destination)
         {
-            await contractService.InitializeAsync();
-            contractNearestOrigin = await contractService.FindNearestContract(origin);
-            contractNearestDestination = await contractService.FindNearestContract(destination);
+            ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
 
-            stationsNearestOrigin = await JCDecauxAPI.GetStationsAsync(contractNearestOrigin.name);
-            stationsNearestDestination = contractNearestOrigin.Equals(contractNearestDestination)
-                                         ? stationsNearestOrigin
-                                         : await JCDecauxAPI.GetStationsAsync(contractNearestDestination.name);
+            Contract[] contracts = proxyServiceClient.GetListContract();
+            CoordinateNominatim[] contractsCoordinates = new CoordinateNominatim[] { };
+            foreach (Contract contract in contracts)
+            {
+                if (contract.cities == null) continue;
+                CoordinateNominatim coordNom = await OpenStreetMapAPI.GetCoordinates(contract.name);
+                contractsCoordinates.Append(coordNom);
+            }
 
+            //proxyServiceClient.setContractService(contracts, contractsCoordinates);
 
             coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
-
             coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);
 
-            if (stationsNearestOrigin.Count != 0)
+            contractNearestOrigin = locationService.FindNearestContract(coordinateOrigin, contracts, contractsCoordinates);
+            contractNearestDestination = locationService.FindNearestContract(coordinateDestination, contracts, contractsCoordinates);
+
+            stationsNearestOrigin = proxyServiceClient.GetListStations(contractNearestOrigin.name);
+            stationsNearestDestination = contractNearestOrigin.Equals(contractNearestDestination)
+                                         ? stationsNearestOrigin
+                                         : proxyServiceClient.GetListStations(contractNearestDestination.name);
+
+
+
+
+            if (stationsNearestOrigin.Count() != 0)
             {
-                Station stationNearestOrigin = StationsService.FindNearestStation(stationsNearestOrigin, coordinateOrigin);
+                Station stationNearestOrigin = locationService.FindNearestStation(coordinateOrigin, stationsNearestOrigin);
                 stationsSelected.Add(stationNearestOrigin);
                 Console.WriteLine($"Station la plus proche de l'addresse d'origine : {stationNearestOrigin.name}");
             }
-            if (stationsNearestDestination.Count != 0)
+            if (stationsNearestDestination.Count() != 0)
             {
-                Station stationNearestDestination = StationsService.FindNearestStation(stationsNearestDestination, coordinateDestination);
+                Station stationNearestDestination = locationService.FindNearestStation(coordinateDestination, stationsNearestDestination);
                 stationsSelected.Add(stationNearestDestination);
                 Console.WriteLine($"Station la plus proche de l'addresse de destination : {stationNearestDestination.name}");
             }
@@ -84,10 +101,10 @@ namespace LetGoBikingService.Services
         {
             if (stations.Count < 2) return false;
 
-            double distanceWithStations = stations.First().position.GetDistanceTo(coordinateOrigin) +
-                                          stations.Last().position.GetDistanceTo(coordinateDestination);
+            double distanceWithStations = locationService.GetDistanceTo(stations.First().position, coordinateOrigin) +
+                                          locationService.GetDistanceTo(stations.Last().position, coordinateDestination);
 
-            return distanceWithStations < coordinateOrigin.GetDistanceTo(coordinateDestination);
+            return distanceWithStations < locationService.GetDistanceTo(coordinateOrigin, coordinateDestination);
         }
     }
 
