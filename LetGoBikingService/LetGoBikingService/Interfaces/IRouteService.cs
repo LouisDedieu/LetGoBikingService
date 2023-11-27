@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.ServiceModel;
-
+using LetGoBikingService.Models;
 
 namespace LetGoBikingService.Interfaces
 {
@@ -8,6 +8,6 @@ namespace LetGoBikingService.Interfaces
     public interface IRouteService
     {
         [OperationContract]
-        Task<string> GetItinerary(string origin, string destination);
+        Task<Itinary> GetItinerary(string origin, string destination);
     }
 }
