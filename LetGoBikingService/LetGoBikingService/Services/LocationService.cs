@@ -13,7 +13,7 @@ namespace LetGoBikingService.Services
     {
         private double R = 6371e3;
 
-        public Contract FindNearestContract(CoordinateNominatim addressCoordinate, Contract[] contracts, CoordinateNominatim[] contractsCoordinates)
+        public Contract FindNearestContract(CoordinateNominatim addressCoordinate, Contract[] contracts, List<CoordinateNominatim> contractsCoordinates)
         {
             Contract nearestContract = null;
             double minDistance = double.MaxValue;

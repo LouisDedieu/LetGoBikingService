@@ -30,18 +30,21 @@ namespace LetGoBikingService.Services
             ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
 
             Contract[] contracts = proxyServiceClient.GetListContract();
-            CoordinateNominatim[] contractsCoordinates = new CoordinateNominatim[] { };
+            List<CoordinateNominatim> contractsCoordinates = new List<CoordinateNominatim>();
             foreach (Contract contract in contracts)
             {
                 if (contract.cities == null) continue;
                 CoordinateNominatim coordNom = await OpenStreetMapAPI.GetCoordinates(contract.name);
-                contractsCoordinates.Append(coordNom);
+                contractsCoordinates.Add(coordNom);
             }
 
             //proxyServiceClient.setContractService(contracts, contractsCoordinates);
 
             coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
             coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);
+
+            Console.WriteLine(contracts.Length);
+            Console.WriteLine(contractsCoordinates.Count());
 
             contractNearestOrigin = locationService.FindNearestContract(coordinateOrigin, contracts, contractsCoordinates);
             contractNearestDestination = locationService.FindNearestContract(coordinateDestination, contracts, contractsCoordinates);
