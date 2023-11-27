@@ -24,6 +24,7 @@ namespace LetGoBikingService.Services
         private CoordinateNominatim coordinateDestination;
 
         private LocationService locationService = new LocationService();
+        private ActiveMQService activeMQService = new ActiveMQService();
 
         public async Task<Itinary> GetItinerary(string origin, string destination)
         {
@@ -89,7 +90,11 @@ namespace LetGoBikingService.Services
                 itinaries.Add(walkToDestination);
 
                 // Combinez ces segments pour former un itinéraire complet
-                return CombineItinaries(itinaries);
+                Itinary combinedItinary = CombineItinaries(itinaries);
+
+                await activeMQService.SendItineraryStepsToQueue(combinedItinary);
+
+                return combinedItinary;
             }
             else
             {
