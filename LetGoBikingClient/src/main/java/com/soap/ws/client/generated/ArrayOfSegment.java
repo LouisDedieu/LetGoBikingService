@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour ArrayOfStation complex type.
+ * <p>Classe Java pour ArrayOfSegment complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfStation"&gt;
+ * &lt;complexType name="ArrayOfSegment"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Station" type="{http://schemas.datacontract.org/2004/07/}Station" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="Segment" type="{http://schemas.datacontract.org/2004/07/LetGoBikingService.Models}Segment" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfStation", propOrder = {
-    "station"
+@XmlType(name = "ArrayOfSegment", propOrder = {
+    "segment"
 })
-public class ArrayOfStation {
+public class ArrayOfSegment {
 
-    @XmlElement(name = "Station", nillable = true)
-    protected List<Station> station;
+    @XmlElement(name = "Segment", nillable = true)
+    protected List<Segment> segment;
 
     /**
-     * Gets the value of the station property.
+     * Gets the value of the segment property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the station property.
+     * This is why there is not a <CODE>set</CODE> method for the segment property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStation().add(newItem);
+     *    getSegment().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Station }
+     * {@link Segment }
      * 
      * 
      */
-    public List<Station> getStation() {
-        if (station == null) {
-            station = new ArrayList<Station>();
+    public List<Segment> getSegment() {
+        if (segment == null) {
+            segment = new ArrayList<Segment>();
         }
-        return this.station;
+        return this.segment;
     }
 
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="GetItineraryResult" type="{http://schemas.datacontract.org/2004/07/LetGoBikingService.Models}Itinerary" minOccurs="0"/&gt;
+ *         &lt;element name="GetItineraryResult" type="{http://schemas.datacontract.org/2004/07/LetGoBikingService.Models}Itinary" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,21 +32,21 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "getItineraryResult"
 })
-@XmlRootElement(name = "GetItineraryResponse")
+@XmlRootElement(name = "GetItineraryResponse", namespace = "http://tempuri.org/")
 public class GetItineraryResponse {
 
     @XmlElementRef(name = "GetItineraryResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<Itinerary> getItineraryResult;
+    protected JAXBElement<Itinary> getItineraryResult;
 
     /**
      * Obtient la valeur de la propriété getItineraryResult.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Itinary }{@code >}
      *     
      */
-    public JAXBElement<Itinerary> getGetItineraryResult() {
+    public JAXBElement<Itinary> getGetItineraryResult() {
         return getItineraryResult;
     }
 
@@ -55,10 +55,10 @@ public class GetItineraryResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Itinary }{@code >}
      *     
      */
-    public void setGetItineraryResult(JAXBElement<Itinerary> value) {
+    public void setGetItineraryResult(JAXBElement<Itinary> value) {
         this.getItineraryResult = value;
     }
 

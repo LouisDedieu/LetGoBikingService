@@ -26,6 +26,7 @@ namespace LetGoBikingService.Services
                 string responseBody = await response.Content.ReadAsStringAsync();
 
                 Itinary it = JsonConvert.DeserializeObject<Itinary>(responseBody);
+                Utils.Converter.PopulateStepCoordinates(it);
                 return it;
             }
             catch (Exception ex)

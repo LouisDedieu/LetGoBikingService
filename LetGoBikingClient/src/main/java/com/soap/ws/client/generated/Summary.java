@@ -8,17 +8,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour Position complex type.
+ * <p>Classe Java pour Summary complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="Position"&gt;
+ * &lt;complexType name="Summary"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Lat" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
- *         &lt;element name="Lng" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="Distance" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="Duration" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,63 +28,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Position", propOrder = {
-    "lat",
-    "lng"
+@XmlType(name = "Summary", propOrder = {
+    "distance",
+    "duration"
 })
-public class Position {
+public class Summary {
 
-    @XmlElement(name = "Lat")
-    protected Double lat;
-    @XmlElement(name = "Lng")
-    protected Double lng;
+    @XmlElement(name = "Distance")
+    protected Double distance;
+    @XmlElement(name = "Duration")
+    protected Double duration;
 
     /**
-     * Obtient la valeur de la propriété lat.
+     * Obtient la valeur de la propriété distance.
      * 
      * @return
      *     possible object is
      *     {@link Double }
      *     
      */
-    public Double getLat() {
-        return lat;
+    public Double getDistance() {
+        return distance;
     }
 
     /**
-     * Définit la valeur de la propriété lat.
+     * Définit la valeur de la propriété distance.
      * 
      * @param value
      *     allowed object is
      *     {@link Double }
      *     
      */
-    public void setLat(Double value) {
-        this.lat = value;
+    public void setDistance(Double value) {
+        this.distance = value;
     }
 
     /**
-     * Obtient la valeur de la propriété lng.
+     * Obtient la valeur de la propriété duration.
      * 
      * @return
      *     possible object is
      *     {@link Double }
      *     
      */
-    public Double getLng() {
-        return lng;
+    public Double getDuration() {
+        return duration;
     }
 
     /**
-     * Définit la valeur de la propriété lng.
+     * Définit la valeur de la propriété duration.
      * 
      * @param value
      *     allowed object is
      *     {@link Double }
      *     
      */
-    public void setLng(Double value) {
-        this.lng = value;
+    public void setDuration(Double value) {
+        this.duration = value;
     }
 
 }
