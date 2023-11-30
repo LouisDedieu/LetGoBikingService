@@ -28,13 +28,13 @@ public interface IRouteService {
      * @param origin
      * @param destination
      * @return
-     *     returns com.soap.ws.client.generated.Itinary
+     *     returns com.soap.ws.client.generated.ArrayOfItinary
      */
     @WebMethod(operationName = "GetItinerary", action = "http://tempuri.org/IRouteService/GetItinerary")
     @WebResult(name = "GetItineraryResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "GetItinerary", targetNamespace = "http://tempuri.org/", className = "com.soap.ws.client.generated.GetItinerary")
     @ResponseWrapper(localName = "GetItineraryResponse", targetNamespace = "http://tempuri.org/", className = "com.soap.ws.client.generated.GetItineraryResponse")
-    public Itinary getItinerary(
+    public ArrayOfItinary getItinerary(
         @WebParam(name = "origin", targetNamespace = "http://tempuri.org/")
         String origin,
         @WebParam(name = "destination", targetNamespace = "http://tempuri.org/")

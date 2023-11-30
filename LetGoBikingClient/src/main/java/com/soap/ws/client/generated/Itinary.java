@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="Features" type="{http://schemas.datacontract.org/2004/07/LetGoBikingService.Models}ArrayOfFeature" minOccurs="0"/&gt;
+ *         &lt;element name="metadata" type="{http://schemas.datacontract.org/2004/07/LetGoBikingService.Models}Metadata" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,12 +30,15 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Itinary", propOrder = {
-    "features"
+    "features",
+    "metadata"
 })
 public class Itinary {
 
     @XmlElementRef(name = "Features", namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfFeature> features;
+    @XmlElementRef(name = "metadata", namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", type = JAXBElement.class, required = false)
+    protected JAXBElement<Metadata> metadata;
 
     /**
      * Obtient la valeur de la propriété features.
@@ -58,6 +62,30 @@ public class Itinary {
      */
     public void setFeatures(JAXBElement<ArrayOfFeature> value) {
         this.features = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété metadata.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     *     
+     */
+    public JAXBElement<Metadata> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * Définit la valeur de la propriété metadata.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     *     
+     */
+    public void setMetadata(JAXBElement<Metadata> value) {
+        this.metadata = value;
     }
 
 }

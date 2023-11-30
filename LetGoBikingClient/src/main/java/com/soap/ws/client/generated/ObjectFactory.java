@@ -28,6 +28,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ArrayOfItinary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "ArrayOfItinary");
     private final static QName _Itinary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Itinary");
     private final static QName _ArrayOfFeature_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "ArrayOfFeature");
     private final static QName _Feature_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Feature");
@@ -38,6 +39,8 @@ public class ObjectFactory {
     private final static QName _Step_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Step");
     private final static QName _Summary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Summary");
     private final static QName _Geometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Geometry");
+    private final static QName _Metadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Metadata");
+    private final static QName _Query_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Query");
     private final static QName _ArrayOfint_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfint");
     private final static QName _ArrayOfArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfArrayOfdouble");
     private final static QName _ArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfdouble");
@@ -65,6 +68,8 @@ public class ObjectFactory {
     private final static QName _GetItineraryOrigin_QNAME = new QName("http://tempuri.org/", "origin");
     private final static QName _GetItineraryDestination_QNAME = new QName("http://tempuri.org/", "destination");
     private final static QName _GetItineraryResponseGetItineraryResult_QNAME = new QName("http://tempuri.org/", "GetItineraryResult");
+    private final static QName _QueryProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "profile");
+    private final static QName _MetadataQuery_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "query");
     private final static QName _GeometryCoordinates_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "coordinates");
     private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Instruction");
     private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Name");
@@ -73,6 +78,7 @@ public class ObjectFactory {
     private final static QName _PropertiesSegments_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Segments");
     private final static QName _FeatureGeometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "geometry");
     private final static QName _ItinaryFeatures_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Features");
+    private final static QName _ItinaryMetadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "metadata");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.soap.ws.client.generated
@@ -95,6 +101,14 @@ public class ObjectFactory {
      */
     public GetItineraryResponse createGetItineraryResponse() {
         return new GetItineraryResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfItinary }
+     * 
+     */
+    public ArrayOfItinary createArrayOfItinary() {
+        return new ArrayOfItinary();
     }
 
     /**
@@ -178,6 +192,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Metadata }
+     * 
+     */
+    public Metadata createMetadata() {
+        return new Metadata();
+    }
+
+    /**
+     * Create an instance of {@link Query }
+     * 
+     */
+    public Query createQuery() {
+        return new Query();
+    }
+
+    /**
      * Create an instance of {@link ArrayOfint }
      * 
      */
@@ -199,6 +229,19 @@ public class ObjectFactory {
      */
     public ArrayOfdouble createArrayOfdouble() {
         return new ArrayOfdouble();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "ArrayOfItinary")
+    public JAXBElement<ArrayOfItinary> createArrayOfItinary(ArrayOfItinary value) {
+        return new JAXBElement<ArrayOfItinary>(_ArrayOfItinary_QNAME, ArrayOfItinary.class, null, value);
     }
 
     /**
@@ -329,6 +372,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Geometry")
     public JAXBElement<Geometry> createGeometry(Geometry value) {
         return new JAXBElement<Geometry>(_Geometry_QNAME, Geometry.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Metadata")
+    public JAXBElement<Metadata> createMetadata(Metadata value) {
+        return new JAXBElement<Metadata>(_Metadata_QNAME, Metadata.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Query")
+    public JAXBElement<Query> createQuery(Query value) {
+        return new JAXBElement<Query>(_Query_QNAME, Query.class, null, value);
     }
 
     /**
@@ -670,16 +739,42 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Itinary }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Itinary }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
      */
     @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetItineraryResult", scope = GetItineraryResponse.class)
-    public JAXBElement<Itinary> createGetItineraryResponseGetItineraryResult(Itinary value) {
-        return new JAXBElement<Itinary>(_GetItineraryResponseGetItineraryResult_QNAME, Itinary.class, GetItineraryResponse.class, value);
+    public JAXBElement<ArrayOfItinary> createGetItineraryResponseGetItineraryResult(ArrayOfItinary value) {
+        return new JAXBElement<ArrayOfItinary>(_GetItineraryResponseGetItineraryResult_QNAME, ArrayOfItinary.class, GetItineraryResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "profile", scope = Query.class)
+    public JAXBElement<String> createQueryProfile(String value) {
+        return new JAXBElement<String>(_QueryProfile_QNAME, String.class, Query.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "query", scope = Metadata.class)
+    public JAXBElement<Query> createMetadataQuery(Query value) {
+        return new JAXBElement<Query>(_MetadataQuery_QNAME, Query.class, Metadata.class, value);
     }
 
     /**
@@ -810,6 +905,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Features", scope = Itinary.class)
     public JAXBElement<ArrayOfFeature> createItinaryFeatures(ArrayOfFeature value) {
         return new JAXBElement<ArrayOfFeature>(_ItinaryFeatures_QNAME, ArrayOfFeature.class, Itinary.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "metadata", scope = Itinary.class)
+    public JAXBElement<Metadata> createItinaryMetadata(Metadata value) {
+        return new JAXBElement<Metadata>(_ItinaryMetadata_QNAME, Metadata.class, Itinary.class, value);
     }
 
 }
