@@ -26,7 +26,7 @@ namespace LetGoBikingService.Services
         private LocationService locationService = new LocationService();
         private ActiveMQService activeMQService = new ActiveMQService();
 
-        public async Task<Itinary> GetItinerary(string origin, string destination)
+        public async Task<List<Itinary>> GetItinerary(string origin, string destination)
         {
             ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
 
@@ -68,38 +68,44 @@ namespace LetGoBikingService.Services
             bool WithOrWithoutBike = isItWorthToUseStations(stationsSelected, coordinateOrigin, coordinateDestination);
             Console.WriteLine($"Is it worth to use them ? {WithOrWithoutBike}");
 
-            Itinary itineraire = await ComputeItinary(WithOrWithoutBike);
+            List<Itinary> itineraire = await ComputeItinary(WithOrWithoutBike);
             return itineraire;
         }
 
-        private async Task<Itinary> ComputeItinary(bool withOrWithoutBike)
+        private async Task<List<Itinary>> ComputeItinary(bool withOrWithoutBike)
         {
+            List<Itinary> itinaries = new List<Itinary>();
+
             if (withOrWithoutBike && stationsSelected.Count >= 2)
             {
-                List<Itinary> itinaries = new List<Itinary>();
                 // Calculer l'itinéraire à pied jusqu'à la première station
                 Itinary walkToFirstStation = await OpenRouteAPI.GetDirections(coordinateOrigin, stationsSelected.First().position, "foot-walking");
                 itinaries.Add(walkToFirstStation);
+
 
                 // Calculer l'itinéraire à vélo entre les deux stations
                 Itinary bikeRoute = await OpenRouteAPI.GetDirections(stationsSelected.First().position, stationsSelected.Last().position, "cycling-regular");
                 itinaries.Add(bikeRoute);
 
+
                 // Calculer l'itinéraire à pied de la dernière station à la destination
                 Itinary walkToDestination = await OpenRouteAPI.GetDirections(stationsSelected.Last().position, coordinateDestination, "foot-walking");
                 itinaries.Add(walkToDestination);
 
+
                 // Combinez ces segments pour former un itinéraire complet
                 Itinary combinedItinary = CombineItinaries(itinaries);
 
-                await activeMQService.SendItineraryStepsToQueue(combinedItinary);
+                await activeMQService.SendItineraryStepsToQueue(itinaries);
 
-                return combinedItinary;
+                return itinaries;
             }
             else
             {
                 // Itinéraire à pied complet si le vélo n'est pas une option valable
-                return await OpenRouteAPI.GetDirections(coordinateOrigin, coordinateDestination, "foot-walking");
+                Itinary it = await OpenRouteAPI.GetDirections(coordinateOrigin, coordinateDestination, "foot-walking");
+                itinaries.Add(it);
+                return itinaries;
             }
         }
 

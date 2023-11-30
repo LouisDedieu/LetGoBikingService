@@ -7,13 +7,25 @@ namespace LetGoBikingService.Models
 {
     public class Itinary
     {
+        public Metadata metadata {  get; set; }
         public List<Feature> Features { get; set; }
+    }
+    public class Metadata
+    {
+        public Query query { get; set; }
+    }
+
+    public class Query
+    {
+        public string profile { get; set; }
     }
 
     public class Feature
     {
         public Properties Properties { get; set; }
         public Geometry geometry { get; set; }
+
+
     }
 
     public class Geometry
@@ -54,5 +66,6 @@ namespace LetGoBikingService.Models
         public double Distance { get; set; }
         public double Duration { get; set; }
     }
+
 
 }
