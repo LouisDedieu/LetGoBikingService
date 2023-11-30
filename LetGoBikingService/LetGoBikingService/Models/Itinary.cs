@@ -7,12 +7,30 @@ namespace LetGoBikingService.Models
 {
     public class Itinary
     {
+        public Metadata metadata {  get; set; }
         public List<Feature> Features { get; set; }
+    }
+    public class Metadata
+    {
+        public Query query { get; set; }
+    }
+
+    public class Query
+    {
+        public string profile { get; set; }
     }
 
     public class Feature
     {
         public Properties Properties { get; set; }
+        public Geometry geometry { get; set; }
+
+
+    }
+
+    public class Geometry
+    {
+        public List<List<double>> coordinates { get; set; }
     }
 
     public class Properties
@@ -34,7 +52,13 @@ namespace LetGoBikingService.Models
         public double Duration { get; set; }
         public string Instruction { get; set; }
         public string Name { get; set; }
-        public List<int> WayPoints { get; set; }
+        public List<int> way_points { get; set; }
+
+        // Les champs Latitude et Longitude ne sont pas dans le JSON mais sont ajoutés séparément
+        public double StartLatitude { get; set; }
+        public double StartLongitude { get; set; }
+        public double EndLatitude { get; set; }
+        public double EndLongitude { get; set; }
     }
 
     public class Summary
@@ -42,5 +66,6 @@ namespace LetGoBikingService.Models
         public double Distance { get; set; }
         public double Duration { get; set; }
     }
+
 
 }

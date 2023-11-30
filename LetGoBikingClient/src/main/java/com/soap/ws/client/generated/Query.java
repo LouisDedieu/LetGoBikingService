@@ -5,21 +5,20 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java pour anonymous complex type.
+ * <p>Classe Java pour Query complex type.
  * 
  * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType&gt;
+ * &lt;complexType name="Query"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="contractName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="profile" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,37 +28,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "contractName"
+@XmlType(name = "Query", propOrder = {
+    "profile"
 })
-@XmlRootElement(name = "GetStations", namespace = "http://tempuri.org/")
-public class GetStations {
+public class Query {
 
-    @XmlElementRef(name = "contractName", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> contractName;
+    @XmlElementRef(name = "profile", namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> profile;
 
     /**
-     * Obtient la valeur de la propriété contractName.
+     * Obtient la valeur de la propriété profile.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<String> getContractName() {
-        return contractName;
+    public JAXBElement<String> getProfile() {
+        return profile;
     }
 
     /**
-     * Définit la valeur de la propriété contractName.
+     * Définit la valeur de la propriété profile.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setContractName(JAXBElement<String> value) {
-        this.contractName = value;
+    public void setProfile(JAXBElement<String> value) {
+        this.profile = value;
     }
 
 }

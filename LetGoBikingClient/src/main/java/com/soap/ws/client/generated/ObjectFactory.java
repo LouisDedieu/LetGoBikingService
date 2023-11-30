@@ -28,9 +28,22 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ArrayOfStation_QNAME = new QName("http://schemas.datacontract.org/2004/07/", "ArrayOfStation");
-    private final static QName _Station_QNAME = new QName("http://schemas.datacontract.org/2004/07/", "Station");
-    private final static QName _Position_QNAME = new QName("http://schemas.datacontract.org/2004/07/", "Position");
+    private final static QName _ArrayOfItinary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "ArrayOfItinary");
+    private final static QName _Itinary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Itinary");
+    private final static QName _ArrayOfFeature_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "ArrayOfFeature");
+    private final static QName _Feature_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Feature");
+    private final static QName _Properties_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Properties");
+    private final static QName _ArrayOfSegment_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "ArrayOfSegment");
+    private final static QName _Segment_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Segment");
+    private final static QName _ArrayOfStep_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "ArrayOfStep");
+    private final static QName _Step_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Step");
+    private final static QName _Summary_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Summary");
+    private final static QName _Geometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Geometry");
+    private final static QName _Metadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Metadata");
+    private final static QName _Query_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Query");
+    private final static QName _ArrayOfint_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfint");
+    private final static QName _ArrayOfArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfArrayOfdouble");
+    private final static QName _ArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfdouble");
     private final static QName _AnyType_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyType");
     private final static QName _AnyURI_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyURI");
     private final static QName _Base64Binary_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "base64Binary");
@@ -52,9 +65,20 @@ public class ObjectFactory {
     private final static QName _Char_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "char");
     private final static QName _Duration_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "duration");
     private final static QName _Guid_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "guid");
-    private final static QName _GetStationsContractName_QNAME = new QName("http://tempuri.org/", "contractName");
-    private final static QName _GetStationsResponseGetStationsResult_QNAME = new QName("http://tempuri.org/", "GetStationsResult");
-    private final static QName _StationName_QNAME = new QName("http://schemas.datacontract.org/2004/07/", "Name");
+    private final static QName _GetItineraryOrigin_QNAME = new QName("http://tempuri.org/", "origin");
+    private final static QName _GetItineraryDestination_QNAME = new QName("http://tempuri.org/", "destination");
+    private final static QName _GetItineraryResponseGetItineraryResult_QNAME = new QName("http://tempuri.org/", "GetItineraryResult");
+    private final static QName _QueryProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "profile");
+    private final static QName _MetadataQuery_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "query");
+    private final static QName _GeometryCoordinates_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "coordinates");
+    private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Instruction");
+    private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Name");
+    private final static QName _StepWayPoints_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "way_points");
+    private final static QName _SegmentSteps_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Steps");
+    private final static QName _PropertiesSegments_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Segments");
+    private final static QName _FeatureGeometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "geometry");
+    private final static QName _ItinaryFeatures_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Features");
+    private final static QName _ItinaryMetadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "metadata");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.soap.ws.client.generated
@@ -64,82 +88,355 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetStations }
+     * Create an instance of {@link GetItinerary }
      * 
      */
-    public GetStations createGetStations() {
-        return new GetStations();
+    public GetItinerary createGetItinerary() {
+        return new GetItinerary();
     }
 
     /**
-     * Create an instance of {@link GetStationsResponse }
+     * Create an instance of {@link GetItineraryResponse }
      * 
      */
-    public GetStationsResponse createGetStationsResponse() {
-        return new GetStationsResponse();
+    public GetItineraryResponse createGetItineraryResponse() {
+        return new GetItineraryResponse();
     }
 
     /**
-     * Create an instance of {@link ArrayOfStation }
+     * Create an instance of {@link ArrayOfItinary }
      * 
      */
-    public ArrayOfStation createArrayOfStation() {
-        return new ArrayOfStation();
+    public ArrayOfItinary createArrayOfItinary() {
+        return new ArrayOfItinary();
     }
 
     /**
-     * Create an instance of {@link Station }
+     * Create an instance of {@link Itinary }
      * 
      */
-    public Station createStation() {
-        return new Station();
+    public Itinary createItinary() {
+        return new Itinary();
     }
 
     /**
-     * Create an instance of {@link Position }
+     * Create an instance of {@link ArrayOfFeature }
      * 
      */
-    public Position createPosition() {
-        return new Position();
+    public ArrayOfFeature createArrayOfFeature() {
+        return new ArrayOfFeature();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfStation }{@code >}
+     * Create an instance of {@link Feature }
+     * 
+     */
+    public Feature createFeature() {
+        return new Feature();
+    }
+
+    /**
+     * Create an instance of {@link Properties }
+     * 
+     */
+    public Properties createProperties() {
+        return new Properties();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfSegment }
+     * 
+     */
+    public ArrayOfSegment createArrayOfSegment() {
+        return new ArrayOfSegment();
+    }
+
+    /**
+     * Create an instance of {@link Segment }
+     * 
+     */
+    public Segment createSegment() {
+        return new Segment();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfStep }
+     * 
+     */
+    public ArrayOfStep createArrayOfStep() {
+        return new ArrayOfStep();
+    }
+
+    /**
+     * Create an instance of {@link Step }
+     * 
+     */
+    public Step createStep() {
+        return new Step();
+    }
+
+    /**
+     * Create an instance of {@link Summary }
+     * 
+     */
+    public Summary createSummary() {
+        return new Summary();
+    }
+
+    /**
+     * Create an instance of {@link Geometry }
+     * 
+     */
+    public Geometry createGeometry() {
+        return new Geometry();
+    }
+
+    /**
+     * Create an instance of {@link Metadata }
+     * 
+     */
+    public Metadata createMetadata() {
+        return new Metadata();
+    }
+
+    /**
+     * Create an instance of {@link Query }
+     * 
+     */
+    public Query createQuery() {
+        return new Query();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfint }
+     * 
+     */
+    public ArrayOfint createArrayOfint() {
+        return new ArrayOfint();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfArrayOfdouble }
+     * 
+     */
+    public ArrayOfArrayOfdouble createArrayOfArrayOfdouble() {
+        return new ArrayOfArrayOfdouble();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfdouble }
+     * 
+     */
+    public ArrayOfdouble createArrayOfdouble() {
+        return new ArrayOfdouble();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStation }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/", name = "ArrayOfStation")
-    public JAXBElement<ArrayOfStation> createArrayOfStation(ArrayOfStation value) {
-        return new JAXBElement<ArrayOfStation>(_ArrayOfStation_QNAME, ArrayOfStation.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "ArrayOfItinary")
+    public JAXBElement<ArrayOfItinary> createArrayOfItinary(ArrayOfItinary value) {
+        return new JAXBElement<ArrayOfItinary>(_ArrayOfItinary_QNAME, ArrayOfItinary.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Station }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Itinary }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Station }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link Itinary }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/", name = "Station")
-    public JAXBElement<Station> createStation(Station value) {
-        return new JAXBElement<Station>(_Station_QNAME, Station.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Itinary")
+    public JAXBElement<Itinary> createItinary(Itinary value) {
+        return new JAXBElement<Itinary>(_Itinary_QNAME, Itinary.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Position }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Position }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/", name = "Position")
-    public JAXBElement<Position> createPosition(Position value) {
-        return new JAXBElement<Position>(_Position_QNAME, Position.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "ArrayOfFeature")
+    public JAXBElement<ArrayOfFeature> createArrayOfFeature(ArrayOfFeature value) {
+        return new JAXBElement<ArrayOfFeature>(_ArrayOfFeature_QNAME, ArrayOfFeature.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Feature }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Feature }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Feature")
+    public JAXBElement<Feature> createFeature(Feature value) {
+        return new JAXBElement<Feature>(_Feature_QNAME, Feature.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Properties")
+    public JAXBElement<Properties> createProperties(Properties value) {
+        return new JAXBElement<Properties>(_Properties_QNAME, Properties.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "ArrayOfSegment")
+    public JAXBElement<ArrayOfSegment> createArrayOfSegment(ArrayOfSegment value) {
+        return new JAXBElement<ArrayOfSegment>(_ArrayOfSegment_QNAME, ArrayOfSegment.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Segment }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Segment }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Segment")
+    public JAXBElement<Segment> createSegment(Segment value) {
+        return new JAXBElement<Segment>(_Segment_QNAME, Segment.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "ArrayOfStep")
+    public JAXBElement<ArrayOfStep> createArrayOfStep(ArrayOfStep value) {
+        return new JAXBElement<ArrayOfStep>(_ArrayOfStep_QNAME, ArrayOfStep.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Step }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Step }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Step")
+    public JAXBElement<Step> createStep(Step value) {
+        return new JAXBElement<Step>(_Step_QNAME, Step.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Summary")
+    public JAXBElement<Summary> createSummary(Summary value) {
+        return new JAXBElement<Summary>(_Summary_QNAME, Summary.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Geometry")
+    public JAXBElement<Geometry> createGeometry(Geometry value) {
+        return new JAXBElement<Geometry>(_Geometry_QNAME, Geometry.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Metadata")
+    public JAXBElement<Metadata> createMetadata(Metadata value) {
+        return new JAXBElement<Metadata>(_Metadata_QNAME, Metadata.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Query")
+    public JAXBElement<Query> createQuery(Query value) {
+        return new JAXBElement<Query>(_Query_QNAME, Query.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOfint")
+    public JAXBElement<ArrayOfint> createArrayOfint(ArrayOfint value) {
+        return new JAXBElement<ArrayOfint>(_ArrayOfint_QNAME, ArrayOfint.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOfdouble }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOfdouble }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOfArrayOfdouble")
+    public JAXBElement<ArrayOfArrayOfdouble> createArrayOfArrayOfdouble(ArrayOfArrayOfdouble value) {
+        return new JAXBElement<ArrayOfArrayOfdouble>(_ArrayOfArrayOfdouble_QNAME, ArrayOfArrayOfdouble.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOfdouble")
+    public JAXBElement<ArrayOfdouble> createArrayOfdouble(ArrayOfdouble value) {
+        return new JAXBElement<ArrayOfdouble>(_ArrayOfdouble_QNAME, ArrayOfdouble.class, null, value);
     }
 
     /**
@@ -423,22 +720,9 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "contractName", scope = GetStations.class)
-    public JAXBElement<String> createGetStationsContractName(String value) {
-        return new JAXBElement<String>(_GetStationsContractName_QNAME, String.class, GetStations.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfStation }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStation }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetStationsResult", scope = GetStationsResponse.class)
-    public JAXBElement<ArrayOfStation> createGetStationsResponseGetStationsResult(ArrayOfStation value) {
-        return new JAXBElement<ArrayOfStation>(_GetStationsResponseGetStationsResult_QNAME, ArrayOfStation.class, GetStationsResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "origin", scope = GetItinerary.class)
+    public JAXBElement<String> createGetItineraryOrigin(String value) {
+        return new JAXBElement<String>(_GetItineraryOrigin_QNAME, String.class, GetItinerary.class, value);
     }
 
     /**
@@ -449,22 +733,191 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/", name = "Name", scope = Station.class)
-    public JAXBElement<String> createStationName(String value) {
-        return new JAXBElement<String>(_StationName_QNAME, String.class, Station.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "destination", scope = GetItinerary.class)
+    public JAXBElement<String> createGetItineraryDestination(String value) {
+        return new JAXBElement<String>(_GetItineraryDestination_QNAME, String.class, GetItinerary.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Position }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Position }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfItinary }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/", name = "Position", scope = Station.class)
-    public JAXBElement<Position> createStationPosition(Position value) {
-        return new JAXBElement<Position>(_Position_QNAME, Position.class, Station.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetItineraryResult", scope = GetItineraryResponse.class)
+    public JAXBElement<ArrayOfItinary> createGetItineraryResponseGetItineraryResult(ArrayOfItinary value) {
+        return new JAXBElement<ArrayOfItinary>(_GetItineraryResponseGetItineraryResult_QNAME, ArrayOfItinary.class, GetItineraryResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "profile", scope = Query.class)
+    public JAXBElement<String> createQueryProfile(String value) {
+        return new JAXBElement<String>(_QueryProfile_QNAME, String.class, Query.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "query", scope = Metadata.class)
+    public JAXBElement<Query> createMetadataQuery(Query value) {
+        return new JAXBElement<Query>(_MetadataQuery_QNAME, Query.class, Metadata.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOfdouble }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOfdouble }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "coordinates", scope = Geometry.class)
+    public JAXBElement<ArrayOfArrayOfdouble> createGeometryCoordinates(ArrayOfArrayOfdouble value) {
+        return new JAXBElement<ArrayOfArrayOfdouble>(_GeometryCoordinates_QNAME, ArrayOfArrayOfdouble.class, Geometry.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Instruction", scope = Step.class)
+    public JAXBElement<String> createStepInstruction(String value) {
+        return new JAXBElement<String>(_StepInstruction_QNAME, String.class, Step.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Name", scope = Step.class)
+    public JAXBElement<String> createStepName(String value) {
+        return new JAXBElement<String>(_StepName_QNAME, String.class, Step.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "way_points", scope = Step.class)
+    public JAXBElement<ArrayOfint> createStepWayPoints(ArrayOfint value) {
+        return new JAXBElement<ArrayOfint>(_StepWayPoints_QNAME, ArrayOfint.class, Step.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Steps", scope = Segment.class)
+    public JAXBElement<ArrayOfStep> createSegmentSteps(ArrayOfStep value) {
+        return new JAXBElement<ArrayOfStep>(_SegmentSteps_QNAME, ArrayOfStep.class, Segment.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Segments", scope = Properties.class)
+    public JAXBElement<ArrayOfSegment> createPropertiesSegments(ArrayOfSegment value) {
+        return new JAXBElement<ArrayOfSegment>(_PropertiesSegments_QNAME, ArrayOfSegment.class, Properties.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Summary", scope = Properties.class)
+    public JAXBElement<Summary> createPropertiesSummary(Summary value) {
+        return new JAXBElement<Summary>(_Summary_QNAME, Summary.class, Properties.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Properties", scope = Feature.class)
+    public JAXBElement<Properties> createFeatureProperties(Properties value) {
+        return new JAXBElement<Properties>(_Properties_QNAME, Properties.class, Feature.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "geometry", scope = Feature.class)
+    public JAXBElement<Geometry> createFeatureGeometry(Geometry value) {
+        return new JAXBElement<Geometry>(_FeatureGeometry_QNAME, Geometry.class, Feature.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "Features", scope = Itinary.class)
+    public JAXBElement<ArrayOfFeature> createItinaryFeatures(ArrayOfFeature value) {
+        return new JAXBElement<ArrayOfFeature>(_ItinaryFeatures_QNAME, ArrayOfFeature.class, Itinary.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "metadata", scope = Itinary.class)
+    public JAXBElement<Metadata> createItinaryMetadata(Metadata value) {
+        return new JAXBElement<Metadata>(_ItinaryMetadata_QNAME, Metadata.class, Itinary.class, value);
     }
 
 }

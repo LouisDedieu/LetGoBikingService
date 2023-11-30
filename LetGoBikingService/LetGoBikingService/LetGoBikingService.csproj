@@ -97,6 +97,7 @@
     <Compile Include="Services\OpenRouteAPI .cs" />
     <Compile Include="Services\OpenStreetMapAPI.cs" />
     <Compile Include="Services\RouteService.cs" />
+    <Compile Include="Utils\Converter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
