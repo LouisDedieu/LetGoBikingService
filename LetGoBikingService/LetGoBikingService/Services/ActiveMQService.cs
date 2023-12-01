@@ -27,7 +27,7 @@ namespace LetGoBikingService.Services
                             {
                                 foreach (var step in segment.Steps)
                                 {
-                                    string messageText = JsonConvert.SerializeObject(step);
+                                    string messageText = JsonConvert.SerializeObject(step.Instruction);
                                     ITextMessage message = session.CreateTextMessage(messageText);
                                     producer.Send(message);
                                 }

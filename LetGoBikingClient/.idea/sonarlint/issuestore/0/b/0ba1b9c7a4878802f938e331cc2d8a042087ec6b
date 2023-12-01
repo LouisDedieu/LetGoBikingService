@@ -1,21 +1,24 @@
 
-L	java:S106 "+Replace this use of System.out by a logger.(ş‰óÇùÿÿÿÿ8¸Àá©Á1
-Ñ
-java:S5301#"®Secure this "ActiveMQConnectionFactory" by whitelisting the trusted packages using the "setTrustedPackages" method and make sure the "setTrustAllPackages" is not set to true.(êÎ ùùÿÿÿÿ8¾Àá©Á1
-L	java:S106,"+Replace this use of System.out by a logger.(ğÃÁÇøÿÿÿÿ8ÁÀá©Á1
-r
-java:S62010"PReplace this instanceof check and cast with 'instanceof TextMessage textMessage'( ÎÃøÿÿÿÿ8ÂÀá©Á1
-F	java:S1062"+Replace this use of System.out by a logger.(ÅìÇ88ÃÀá©Á1
+g	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8½éÎ¯Â1
+{
+java:S2293c"YReplace the type specification in this constructor call with the diamond operator ("<>").(½Ïüìûÿÿÿÿ8ÀéÎ¯Â1
+{
+java:S2293e"YReplace the type specification in this constructor call with the diamond operator ("<>").(„“üÿÿÿÿ8ÀéÎ¯Â1
+v
+java:S2293h"YReplace the type specification in this constructor call with the diamond operator ("<>").(ª­¿Ñ8ÀéÎ¯Â1
+{
+java:S2293}"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘Ÿ„µÿÿÿÿÿ8ÁéÎ¯Â1
+w
+java:S2293€"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ãµø¸8ÁéÎ¯Â1
+w
+java:S2293…"YReplace the type specification in this constructor call with the diamond operator ("<>").(ùûÛ©8ÁéÎ¯Â1
+w
+java:S2293Œ"YReplace the type specification in this constructor call with the diamond operator ("<>").(¯ü¾³8ÁéÎ¯Â1
+n
+java:S3655‘"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‰…›Â8šÔÖ¯Â1
 f
-java:S3252e"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8ÎÀá©Á1
-^
-java:S1854z"<Remove this useless assignment to local variable "painters".(áÑÑ¾ıÿÿÿÿ8˜Ö—ªÁ1
-]
-java:S1854w"@Remove this useless assignment to local variable "routePainter".(Ÿåòè8˜Ö—ªÁ1
-M
-java:S1172h"0Remove this unused method parameter "mapViewer".(Ãæë¼8™Ö—ªÁ1
+java:S3252\"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8ÏóÎ¯Â1
+l
+java:S1128"JRemove this unused import 'org.apache.activemq.ActiveMQConnectionFactory'.(‘£‘Áşÿÿÿÿ8ÖÔÖ¯Â1
 N
-java:S1481w"1Remove this unused "routePainter" local variable.(Ÿåòè8Ö—ªÁ1
-O
-java:S1481z"-Remove this unused "painters" local variable.(áÑÑ¾ıÿÿÿÿ8ŸÖ—ªÁ1
-W	java:S125{"<This block of commented-out lines of code should be removed.(Õ€‚E8ŸÖ—ªÁ1
+java:S1128",Remove this unused import 'javax.jms.Queue'.(™éæÉûÿÿÿÿ8ÖÔÖ¯Â1

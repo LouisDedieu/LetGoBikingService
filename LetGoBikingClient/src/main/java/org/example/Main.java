@@ -35,83 +35,70 @@ public class Main {
             String destination = "Beauvoir-de-Marc, 1644 Rte de Lyon";
             List<Itinary> response = routeServiceClient.getItinerary(origin, destination).getItinary();
 
-            SwingUtilities.invokeLater(() -> createAndShowMap(response));
-
-            // Configuration de la connexion ActiveMQ
-            ConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
-            Connection connection = factory.createConnection();
-            connection.start();
-            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Queue queue = session.createQueue("ItineraryQueue");
-
-            MessageConsumer consumer = session.createConsumer(queue);
-            connection.start();
-
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("Appuyez sur Entrée pour recevoir le prochain message...");
-
-            // Boucle de réception des messages
-            while (true) {
-                System.out.println("En attente du prochain message (appuyez sur Entrée)...");
-                scanner.nextLine(); // Attente de la pression sur la touche Entrée
-
-                Message message = consumer.receive(1000); // Attendre le message pendant 1 seconde
-                if (message instanceof TextMessage) {
-                    TextMessage textMessage = (TextMessage) message;
-                    System.out.println("Message reçu: " + textMessage.getText());
-                } else if (message == null) {
-                    break;
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    createAndShowMap(response);
+                } catch (JMSException e) {
+                    throw new RuntimeException(e);
                 }
-            }
-            consumer.close();
-            session.close();
-            connection.close();
+            });
+
+
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private static void createAndShowMap(List<Itinary> itinary) {
-        // Création de la carte
-        JXMapViewer mapViewer = new JXMapViewer();
+    // Fonction principale pour créer et montrer la carte
+    private static void createAndShowMap(List<Itinary> itinary) throws JMSException {
+        JXMapViewer mapViewer = initializeMapViewer(itinary);
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        setupUI(mapViewer, textArea);
+    }
 
-        // Configuration de la tuile et de la position initiale
+    // Initialisation et configuration de JXMapViewer
+    private static JXMapViewer initializeMapViewer(List<Itinary> itinary) {
+        JXMapViewer mapViewer = new JXMapViewer();
         OSMTileFactoryInfo info = new OSMTileFactoryInfo();
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
         mapViewer.setTileFactory(tileFactory);
 
-        // Activer le déplacement de la carte avec la souris
         PanMouseInputListener pannerPlugin = new PanMouseInputListener(mapViewer);
         mapViewer.addMouseListener(pannerPlugin);
         mapViewer.addMouseMotionListener(pannerPlugin);
         mapViewer.addMouseListener(new CenterMapListener(mapViewer));
-
-        // Activer le zoom avec la molette de la souris
         mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
-
-        // Activer le déplacement avec les touches du clavier
         mapViewer.addKeyListener(new PanKeyListener(mapViewer));
-
-        // Assurez-vous que la carte est focusable pour recevoir les entrées du clavier
         mapViewer.setFocusable(true);
         mapViewer.requestFocusInWindow();
 
-        // Ajouter l'itinéraire à la carte
         addRouteToMap(mapViewer, itinary);
+        return mapViewer;
+    }
 
-        // Création et affichage du JFrame
+    // Configuration de l'interface utilisateur
+    private static void setupUI(JXMapViewer mapViewer, JTextArea textArea) throws JMSException {
+        MessageViewer messageViewer = new MessageViewer();
+        JPanel messagePanel = messageViewer.createMessagePanel(textArea);
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, messagePanel, mapViewer);
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerLocation(250);
+
         JFrame frame = new JFrame("JXMapViewer2 - Interactive Map Viewer");
-        frame.getContentPane().add(mapViewer);
-        frame.setSize(800, 600);
+        frame.getContentPane().add(splitPane, BorderLayout.CENTER);
+        frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
     private static void addRouteToMap(JXMapViewer mapViewer, List<Itinary> itinaries) {
         // Liste pour stocker les positions Geo
         List<GeoPosition> track = null;
         List<RoutePainter> routePainters = new ArrayList<RoutePainter>();
         Color c = Color.RED;
+        Set<Waypoint> waypoints = new HashSet<Waypoint>(2);
 
         for (Itinary itinary : itinaries) {
             track = new ArrayList<GeoPosition>();
@@ -122,14 +109,13 @@ public class Main {
                 ArrayOfArrayOfdouble coordinates = feature.getGeometry().getValue().getCoordinates().getValue();
                 for (ArrayOfdouble coord : coordinates.getArrayOfdouble()) {
                     track.add(new GeoPosition(coord.getDouble().get(1), coord.getDouble().get(0))); // Latitude, Longitude
+                    waypoints.add(new DefaultWaypoint(coord.getDouble().get(1), coord.getDouble().get(0)));
                 }
             }
             if (itinary.getMetadata().getValue().getQuery().getValue().getProfile().getValue().equals(WALKING))
                 c = Color.BLUE;
             else if (itinary.getMetadata().getValue().getQuery().getValue().getProfile().getValue().equals(CYCLING))
                 c = Color.RED;
-
-
 
             RoutePainter routePainter = new RoutePainter(track, c);
             routePainters.add(routePainter);
@@ -138,14 +124,14 @@ public class Main {
         // Set the focus
         mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
 
-        Set<Waypoint> waypoints = new HashSet<Waypoint>(2);
         // Ajoutez les points de départ et d'arrivée
-        waypoints.add(new DefaultWaypoint(itinaries.get(0).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(0).getDouble().get(1), itinaries.get(0).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(0).getDouble().get(0)));
-        waypoints.add(new DefaultWaypoint(itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().size()-1).getDouble().get(1), itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().size()-1).getDouble().get(0)));
+        Set<Waypoint> startEnd = new HashSet<Waypoint>(2);
+        startEnd.add(new DefaultWaypoint(itinaries.get(0).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(0).getDouble().get(1), itinaries.get(0).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(0).getDouble().get(0)));
+        startEnd.add(new DefaultWaypoint(itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().size()-1).getDouble().get(1), itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(itinaries.get(itinaries.size()-1).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().size()-1).getDouble().get(0)));
 
         // Create a waypoint painter that takes all the waypoints
         WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
-        waypointPainter.setWaypoints(waypoints);
+        waypointPainter.setWaypoints(startEnd);
 
         // Create a compound painter that uses both the route-painter and the waypoint-painter
         List<Painter<JXMapViewer>> painters = new ArrayList<>(routePainters);
@@ -153,6 +139,10 @@ public class Main {
 
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
         mapViewer.setOverlayPainter(painter);
+
+        //center map on the first waypoint
+        mapViewer.setZoom(5);
+        mapViewer.setAddressLocation(startEnd.stream().findFirst().get().getPosition());
     }
 
 }

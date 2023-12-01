@@ -1,4 +1,5 @@
 ﻿using ProxyCacheSOAP.Models;
+using ProxyCacheSOAP.Service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,18 +8,19 @@ namespace ProxyCacheSOAP
 {
     public class ProxyService : IProxyService
     {
+        private GenericProxyCache<List<Contract>> contractCache = new GenericProxyCache<List<Contract>>();
+        private GenericProxyCache<List<Station>> stationCache = new GenericProxyCache<List<Station>>();
+
         public ProxyService() { }
 
         public async Task<List<Contract>> GetListContract()
         {
-            var listContract = await JCDecauxAPI.GetContractsAsync();
-            return listContract;
+            return contractCache.Get("contracts", () => JCDecauxAPI.GetContractsAsync().Result);
         }
 
         public async Task<List<Station>> GetListStations(string contractName)
         {
-            var listStation = await JCDecauxAPI.GetStationsAsync(contractName);
-            return listStation;
+            return stationCache.Get($"stations_{contractName}", () => JCDecauxAPI.GetStationsAsync(contractName).Result);
         }
     }
 }
