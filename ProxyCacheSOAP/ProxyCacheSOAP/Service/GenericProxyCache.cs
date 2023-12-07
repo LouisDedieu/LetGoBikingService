@@ -16,7 +16,7 @@ namespace ProxyCacheSOAP.Service
         private ObjectCache cache = MemoryCache.Default;
         public DateTimeOffset dt_default = ObjectCache.InfiniteAbsoluteExpiration;
 
-        public T Get(string cacheItemName, Func<T> createItem, double dt_seconds = double.MaxValue)
+        public T Get(string cacheItemName, Func<T> createItem, double dt_minutes)
         {
             if (cache.Contains(cacheItemName))
             {
@@ -24,7 +24,7 @@ namespace ProxyCacheSOAP.Service
             }
             else
             {
-                DateTimeOffset expiration = dt_seconds == double.MaxValue ? dt_default : DateTimeOffset.Now.AddSeconds(dt_seconds);
+                DateTimeOffset expiration = dt_minutes == double.MaxValue ? dt_default : DateTimeOffset.Now.AddMinutes(dt_minutes);
                 T newItem = createItem();
                 cache.Set(cacheItemName, newItem, expiration);
                 return newItem;

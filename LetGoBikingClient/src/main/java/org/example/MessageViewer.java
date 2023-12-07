@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class MessageViewer {
 
     private MessageConsumer consumer;
@@ -27,20 +26,37 @@ public class MessageViewer {
 
         panel.add(new JScrollPane(textArea), BorderLayout.CENTER);
 
-        JButton button = new JButton("Get Next Message");
+        JButton button = new JButton("Get Next Messages");
         panel.add(button, BorderLayout.SOUTH);
 
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int messagesConsumed = 0;
+
                 try {
-                    Message message = consumer.receiveNoWait(); // Ne pas attendre indéfiniment pour un message
-                    if (message instanceof TextMessage) {
-                        TextMessage textMessage = (TextMessage) message;
-                        String text = textMessage.getText();
-                        textArea.append(text + "\n");
-                    } else {
-                        textArea.append("Aucun nouveau message.\n");
+                    for (int i = 0; i < 10; i++) {
+                        Message message = consumer.receiveNoWait();
+                        if (message == null) {
+                            break;
+                        }
+                        messagesConsumed++;
+
+                        if (message instanceof TextMessage) {
+                            TextMessage textMessage = (TextMessage) message;
+                            String text = textMessage.getText();
+                            textArea.append(text + "\n");
+                        }
+                        if (messagesConsumed > 0) {
+                            // Mettez à jour la liste des GeoPosition ici
+                            // Exemple: supprimer les derniers 'messagesConsumed' GeoPosition de la liste
+                            updateGeoPositions(messagesConsumed);
+
+                            // Mettez à jour l'affichage de l'itinéraire ici
+                            //refreshRouteDisplay();
+                        } else {
+                            textArea.append("Aucun nouveau message à traiter.\n");
+                        }
                     }
                 } catch (JMSException ex) {
                     ex.printStackTrace();
@@ -48,6 +64,11 @@ public class MessageViewer {
             }
         });
 
+
         return panel;
+    }
+
+    private void updateGeoPositions(int messagesConsumed) {
+
     }
 }

@@ -16,39 +16,94 @@ import javax.jms.*;
 import javax.jms.Queue;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
 public class Main {
     private static final String WALKING = "foot-walking" ;
     private static final String CYCLING = "cycling-regular" ;
+    private static String origin;
+    private static String destination;
+    private static IRouteService routeServiceClient;
 
     public static void main(String[] args) {
+
         try {
 
             // Création du client SOAP
             RouteService service = new RouteService();
-            IRouteService routeServiceClient = service.getBasicHttpBindingIRouteService();
-
-            // Appel du service SOAP pour obtenir l'itinéraire
-            String origin = "Cublize, 48 Rue de L Hôtel de ville";
-            String destination = "Beauvoir-de-Marc, 1644 Rte de Lyon";
-            List<Itinary> response = routeServiceClient.getItinerary(origin, destination).getItinary();
-
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    createAndShowMap(response);
-                } catch (JMSException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-
+            routeServiceClient = service.getBasicHttpBindingIRouteService();
+            askOriginAndDestination();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private static void askOriginAndDestination() {
+        // Créer la fenêtre
+        JFrame frame = new JFrame("Travel Form");
+        frame.setSize(400, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+
+        // Ajouter les composants
+        addComponents(frame);
+
+        // Afficher la fenêtre
+        frame.setVisible(true);
+    }
+
+    private static void addComponents(JFrame frame) {
+        // Créer les labels
+        JLabel originLabel = new JLabel("Origin:");
+        originLabel.setBounds(10, 20, 80, 25);
+        frame.add(originLabel);
+
+        JLabel destinationLabel = new JLabel("Destination:");
+        destinationLabel.setBounds(10, 50, 80, 25);
+        frame.add(destinationLabel);
+
+        // Créer les champs de texte
+        JTextField originField = new JTextField(20);
+        originField.setBounds(100, 20, 165, 25);
+        frame.add(originField);
+
+        JTextField destinationField = new JTextField(20);
+        destinationField.setBounds(100, 50, 165, 25);
+        frame.add(destinationField);
+
+        // Créer le bouton
+        JButton submitButton = new JButton("Submit");
+        submitButton.setBounds(100, 80, 80, 25);
+        frame.add(submitButton);
+
+        // Ajouter l'action du bouton
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                origin = originField.getText();
+                destination = destinationField.getText();
+
+                // Vous pouvez initialiser vos variables ici
+                System.out.println("Origin: " + origin + ", Destination: " + destination);
+                frame.setVisible(false);
+
+                List<Itinary> response = routeServiceClient.getItinerary(origin, destination).getItinary();
+
+                SwingUtilities.invokeLater(() -> {
+                    try {
+                        createAndShowMap(response);
+                    } catch (JMSException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+            }
+        });
+    }
+
     // Fonction principale pour créer et montrer la carte
     private static void createAndShowMap(List<Itinary> itinary) throws JMSException {
         JXMapViewer mapViewer = initializeMapViewer(itinary);
