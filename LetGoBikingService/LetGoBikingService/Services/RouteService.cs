@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace LetGoBikingService.Services
 {
-    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true, InstanceContextMode = InstanceContextMode.Single)]
 
     public class RouteService : IRouteService
     {
         private Contract contractNearestOrigin;
         private Contract contractNearestDestination;
+        private Contract[] contracts;
 
         private Station[] stationsNearestOrigin;
         private Station[] stationsNearestDestination;
@@ -26,11 +27,18 @@ namespace LetGoBikingService.Services
         private LocationService locationService = new LocationService();
         private ActiveMQService activeMQService = new ActiveMQService();
 
+        private ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
+
+        public RouteService()
+        {
+            contracts = proxyServiceClient.GetListContract();
+        }
+
         public async Task<List<Itinary>> GetItinerary(string origin, string destination)
         {
-            ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
+            
 
-            Contract[] contracts = proxyServiceClient.GetListContract();
+            contracts = proxyServiceClient.GetListContract();
             List<CoordinateNominatim> contractsCoordinates = new List<CoordinateNominatim>();
             foreach (Contract contract in contracts)
             {

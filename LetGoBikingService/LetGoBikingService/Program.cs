@@ -14,8 +14,9 @@ namespace LetGoBikingService
             // Définir l'URL de base pour le service
             Uri baseAddressRoute = new Uri("http://localhost:8090/RouteService");
 
+            var routeService = new RouteService();
             //Create ServiceHost
-            ServiceHost hostRoute = new ServiceHost(typeof(RouteService), baseAddressRoute);
+            ServiceHost hostRoute = new ServiceHost(routeService, baseAddressRoute);
 
             // Créer une instance de WSHttpBinding avec une taille maximale de message augmentée
             BasicHttpBinding binding = new BasicHttpBinding
