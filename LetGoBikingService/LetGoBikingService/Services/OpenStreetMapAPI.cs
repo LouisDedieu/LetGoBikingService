@@ -26,7 +26,7 @@ namespace LetGoBikingService
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors de la récupération des coordonneess : {ex.Message}");
+                Console.WriteLine($"Erreur lors de la récupération des coordonneess de {address}: adresse incorrecte");
                 return null;
 
             }

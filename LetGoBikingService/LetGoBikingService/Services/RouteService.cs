@@ -1,6 +1,7 @@
 ﻿using LetGoBikingService.Interfaces;
 using LetGoBikingService.Models;
 using LetGoBikingService.ServiceReference1;
+using ProxyCacheSOAP.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,9 @@ namespace LetGoBikingService.Services
         private ActiveMQService activeMQService = new ActiveMQService();
 
         private ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
+        private GenericProxyCache<List<Itinary>> itinaryCache = new GenericProxyCache<List<Itinary>>();
+        private readonly double itinaryExpirationTime = 10080; //10080min = 1 week
+
 
         public RouteService()
         {
@@ -36,8 +40,16 @@ namespace LetGoBikingService.Services
 
         public async Task<List<Itinary>> GetItinerary(string origin, string destination)
         {
-            
 
+            string cacheKey = $"Itinerary-{origin}-{destination}";
+            List<Itinary> it = itinaryCache.Get(cacheKey, () => GetItineraryImpl(origin, destination).Result, itinaryExpirationTime);
+            await activeMQService.SendItineraryStepsToQueue(it);
+            return it;
+
+        }
+
+        public async Task<List<Itinary>> GetItineraryImpl(string origin, string destination)
+        {
             contracts = proxyServiceClient.GetListContract();
             List<CoordinateNominatim> contractsCoordinates = new List<CoordinateNominatim>();
             foreach (Contract contract in contracts)

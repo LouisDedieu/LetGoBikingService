@@ -16,7 +16,6 @@ namespace ProxyCacheSOAP
 
         public async Task<List<Contract>> GetListContract()
         {
-            Console.WriteLine("getcontracts");
             return contractCache.Get("contracts", () => JCDecauxAPI.GetContractsAsync().Result, contractExpirationTime);
         }
 
