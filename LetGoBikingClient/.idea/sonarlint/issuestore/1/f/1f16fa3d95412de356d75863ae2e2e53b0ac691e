@@ -1,0 +1,8 @@
+
+v
+java:S2293l"YReplace the type specification in this constructor call with the diamond operator ("<>").(ì‡†8¬ŸşÍÄ1
+f
+java:S3252>"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8‹…ŸªÄ1
+t
+java:S3776B"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(èô¦ğıÿÿÿÿ8±ÓíÍÄ1
+G	java:S106V"+Replace this use of System.err by a logger.(¿±Ã…8ßÓíÍÄ1

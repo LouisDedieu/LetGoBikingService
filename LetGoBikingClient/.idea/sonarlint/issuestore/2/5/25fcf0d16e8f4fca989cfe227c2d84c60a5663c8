@@ -1,12 +1,19 @@
 
 E
-java:S1604 "(Make this anonymous inner class a lambda(Èú†8ÒŞ³òÃ1
+java:S1604'"(Make this anonymous inner class a lambda(Èú†8ÈŞøÓÄ1
 £
-java:S1186G"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(†Œùÿÿÿÿ8ŠºİòÃ1
+java:S1186^"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(†Œùÿÿÿÿ8ìŞøÓÄ1
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ÁˆŸÔüÿÿÿÿ8îŞøÓÄ1
 Ñ
-java:S5301"®Secure this "ActiveMQConnectionFactory" by whitelisting the trusted packages using the "setTrustedPackages" method and make sure the "setTrustAllPackages" is not set to true.(êÎ ùùÿÿÿÿ8¨Œ–òÃ1
+java:S5301"®Secure this "ActiveMQConnectionFactory" by whitelisting the trusted packages using the "setTrustedPackages" method and make sure the "setTrustAllPackages" is not set to true.(êÎ ùùÿÿÿÿ8öŞøÓÄ1
 r
-java:S6201-"PReplace this instanceof check and cast with 'instanceof TextMessage textMessage'( ÎÃøÿÿÿÿ8“ß³òÃ1
-]	java:S1258"<This block of commented-out lines of code should be removed.(Ó»¿Õøÿÿÿÿ8¢±ÕòÃ1
+java:S62014"PReplace this instanceof check and cast with 'instanceof TextMessage textMessage'( ÎÃøÿÿÿÿ8úŞøÓÄ1
 Y
-java:S1172G"7Remove this unused method parameter "messagesConsumed".(†Œùÿÿÿÿ8şöÜòÃ1
+java:S1172^"7Remove this unused method parameter "messagesConsumed".(†Œùÿÿÿÿ8şŞøÓÄ1
+U
+java:S1128"8Remove this unused import 'org.jxmapviewer.JXMapViewer'.(¾ËÂ®8şŞøÓÄ1
+W
+java:S1128";Remove this unused import 'org.example.Main.addRouteToMap'.(º€ßD8şŞøÓÄ1
+Y
+java:S1144^"7Remove this unused private "updateGeoPositions" method.(†Œùÿÿÿÿ8şŞøÓÄ1

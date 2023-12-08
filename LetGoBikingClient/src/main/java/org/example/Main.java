@@ -1,7 +1,6 @@
 package org.example;
 
 import com.soap.ws.client.generated.*;
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.CenterMapListener;
@@ -13,7 +12,6 @@ import org.jxmapviewer.painter.Painter;
 import org.jxmapviewer.viewer.*;
 
 import javax.jms.*;
-import javax.jms.Queue;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +22,9 @@ import java.util.List;
 public class Main {
     private static final String WALKING = "foot-walking" ;
     private static final String CYCLING = "cycling-regular" ;
+    private static List<Itinary> response = null;
+    private static List<GeoPosition> track = null;
+    private static JXMapViewer mapViewer;
     private static String origin;
     private static String destination;
     private static IRouteService routeServiceClient;
@@ -84,14 +85,17 @@ public class Main {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                origin = originField.getText();
-                destination = destinationField.getText();
+//                origin = originField.getText();
+//                destination = destinationField.getText();
+
+                origin = "4 Rue de Paris, 69210 L'Arbresle";
+                destination = "30 Rue Marchande, 38200 Vienne";
 
                 // Vous pouvez initialiser vos variables ici
                 System.out.println("Origin: " + origin + ", Destination: " + destination);
                 frame.setVisible(false);
 
-                List<Itinary> response = routeServiceClient.getItinerary(origin, destination).getItinary();
+                response = routeServiceClient.getItinerary(origin, destination).getItinary();
 
                 SwingUtilities.invokeLater(() -> {
                     try {
@@ -114,7 +118,7 @@ public class Main {
 
     // Initialisation et configuration de JXMapViewer
     private static JXMapViewer initializeMapViewer(List<Itinary> itinary) {
-        JXMapViewer mapViewer = new JXMapViewer();
+        mapViewer = new JXMapViewer();
         OSMTileFactoryInfo info = new OSMTileFactoryInfo();
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
         mapViewer.setTileFactory(tileFactory);
@@ -129,6 +133,7 @@ public class Main {
         mapViewer.requestFocusInWindow();
 
         addRouteToMap(mapViewer, itinary);
+        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
         return mapViewer;
     }
 
@@ -148,9 +153,8 @@ public class Main {
         frame.setVisible(true);
     }
 
-    private static void addRouteToMap(JXMapViewer mapViewer, List<Itinary> itinaries) {
+    static void addRouteToMap(JXMapViewer mapViewer, List<Itinary> itinaries) {
         // Liste pour stocker les positions Geo
-        List<GeoPosition> track = null;
         List<RoutePainter> routePainters = new ArrayList<RoutePainter>();
         Color c = Color.RED;
         Set<Waypoint> waypoints = new HashSet<Waypoint>(2);
@@ -175,10 +179,6 @@ public class Main {
             RoutePainter routePainter = new RoutePainter(track, c);
             routePainters.add(routePainter);
         }
-
-        // Set the focus
-        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
-
         // Ajoutez les points de départ et d'arrivée
         Set<Waypoint> startEnd = new HashSet<Waypoint>(2);
         startEnd.add(new DefaultWaypoint(itinaries.get(0).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(0).getDouble().get(1), itinaries.get(0).getFeatures().getValue().getFeature().get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble().get(0).getDouble().get(0)));
@@ -194,11 +194,81 @@ public class Main {
 
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
         mapViewer.setOverlayPainter(painter);
-
-        //center map on the first waypoint
-        mapViewer.setZoom(5);
-        mapViewer.setAddressLocation(startEnd.stream().findFirst().get().getPosition());
     }
 
+    public static void refreshMap(int messagesConsumed) {
+        if (response == null) return;
+
+        int i = 0;
+        while (i < messagesConsumed && !response.isEmpty()) {
+            Itinary firstItinary = response.get(0); // Obtenez le premier Itinary
+            List<Feature> features = firstItinary.getFeatures().getValue().getFeature();
+
+            if (!features.isEmpty()) {
+                Feature firstFeature = features.get(0);
+                List<Segment> segments = firstFeature.getProperties().getValue().getSegments().getValue().getSegment();
+
+                if (!segments.isEmpty()) {
+                    Segment firstSegment = segments.get(0);
+                    List<Step> steps = firstSegment.getSteps().getValue().getStep();
+
+                    if (!steps.isEmpty()) {
+                        // Supprimez la première step
+                        steps.remove(0);
+
+                        // Supprimez également les coordonnées géographiques correspondantes
+                        try{
+                            int nbWaypointsToDelete = steps.get(0).getWayPoints().getValue().getInt().get(1)
+                                    - steps.get(0).getWayPoints().getValue().getInt().get(0) + 1;
+                            for (int j=0; j<nbWaypointsToDelete; j++) {
+                                List<ArrayOfdouble> coordinates = features.get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble();
+                                if (!coordinates.isEmpty() && coordinates.size()>2) {
+                                    coordinates.remove(0); // Supprimez la coordonnée correspondante
+                                }
+                                else {
+                                    break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("No waypoints to delete");
+                        }
+
+
+                    } else {
+                        segments.remove(0); // Si pas de steps, supprimez le Segment entier
+                    }
+                } else {
+                    features.remove(0); // Si pas de segments, supprimez la Feature entière
+                }
+            } else {
+                response.remove(0); // Si pas de features, supprimez l'Itinary entier
+            }
+
+            i++; // Incrémente i après chaque itération
+        }
+
+        // Après la mise à jour des itinéraires, rafraîchir l'affichage de la carte
+        refreshRouteDisplay(mapViewer, response);
+    }
+
+
+
+
+    public static void refreshRouteDisplay(JXMapViewer mapViewer, List<Itinary> itinaries) {
+        // Effacez les anciens itinéraires
+        mapViewer.setOverlayPainter(null);
+
+        // Reconstruisez track et ajoutez les nouveaux itinéraires
+        addRouteToMap(mapViewer, itinaries);
+
+        // Redessiner la carte
+        mapViewer.repaint();
+    }
+
+
+
+    public static List<Itinary> getResponse() {
+        return response;
+    }
 }
 

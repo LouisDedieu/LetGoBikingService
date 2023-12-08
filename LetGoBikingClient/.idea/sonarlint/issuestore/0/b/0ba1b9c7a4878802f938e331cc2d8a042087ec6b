@@ -1,29 +1,29 @@
 
-g	java:S112d"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8š¹¾ñÃ1
+g	java:S112h"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8Ù¢éÛÄ1
 |
-java:S2293š"YReplace the type specification in this constructor call with the diamond operator ("<>").(½Ïüìûÿÿÿÿ8ëı ñÃ1
+java:S2293ˆ"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘Ÿ„µÿÿÿÿÿ8Ú¢éÛÄ1
 |
-java:S2293œ"YReplace the type specification in this constructor call with the diamond operator ("<>").(„“üÿÿÿÿ8ìı ñÃ1
-w
-java:S2293Ÿ"YReplace the type specification in this constructor call with the diamond operator ("<>").(ª­¿Ñ8ìı ñÃ1
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(½Ïüìûÿÿÿÿ8Û¢éÛÄ1
 |
-java:S2293´"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘Ÿ„µÿÿÿÿÿ8ìı ñÃ1
+java:S2293 "YReplace the type specification in this constructor call with the diamond operator ("<>").(„“üÿÿÿÿ8Û¢éÛÄ1
 w
-java:S2293·"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ãµø¸8ìı ñÃ1
+java:S2293£"YReplace the type specification in this constructor call with the diamond operator ("<>").(ª­¿Ñ8Û¢éÛÄ1
 w
-java:S2293¼"YReplace the type specification in this constructor call with the diamond operator ("<>").(ùûÛ©8íı ñÃ1
+java:S2293·"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ãµø¸8Û¢éÛÄ1
 w
-java:S2293Ã"YReplace the type specification in this constructor call with the diamond operator ("<>").(¯ü¾³8íı ñÃ1
+java:S2293¼"YReplace the type specification in this constructor call with the diamond operator ("<>").(ùûÛ©8Û¢éÛÄ1
+w
+java:S2293Ã"YReplace the type specification in this constructor call with the diamond operator ("<>").(¯ü¾³8Û¢éÛÄ1
 J
-java:S1604T"(Make this anonymous inner class a lambda(Ï¹ÿîúÿÿÿÿ8ñ¦±ñÃ1
-n
-java:S3655È"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‰…›Â8€‚¡ñÃ1
+java:S1604U"(Make this anonymous inner class a lambda(Ï¹ÿîúÿÿÿÿ8İ¢éÛÄ1
 f
-java:S32521"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8‚¡ñÃ1
-G	java:S106["+Replace this use of System.out by a logger.(Ø‚œ½8”ª±ñÃ1
+java:S32522"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8…¦éÛÄ1
+X	java:S125X"<This block of commented-out lines of code should be removed.(¥…Ñê8‰¦éÛÄ1
+G	java:S106_"+Replace this use of System.out by a logger.(Ø‚œ½8Š¦éÛÄ1
+’
+java:S1130"oRemove the declaration of thrown exception 'javax.jms.JMSException', as it cannot be thrown from method's body.(€Œûìùÿÿÿÿ8‘¦éÛÄ1
 g
-java:S3252“"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8´Ä°ñÃ1
-l
-java:S1128"JRemove this unused import 'org.apache.activemq.ActiveMQConnectionFactory'.(‘£‘Áşÿÿÿÿ8ÛäñÃ1
-N
-java:S1128",Remove this unused import 'javax.jms.Queue'.(™éæÉûÿÿÿÿ8‚ÛäñÃ1
+java:S3252˜"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8”¦éÛÄ1
+p
+java:S3776Ç"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(ÚÅ¦Á8¢¦éÛÄ1
+M	java:S106é"+Replace this use of System.out by a logger.(ş÷Ÿ–ûÿÿÿÿ8¦¦éÛÄ1
