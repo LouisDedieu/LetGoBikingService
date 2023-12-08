@@ -26,4 +26,3 @@ g
 java:S3252˜"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8”¦éÛÄ1
 p
 java:S3776Ç"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(ÚÅ¦Á8¢¦éÛÄ1
-M	java:S106é"+Replace this use of System.out by a logger.(ş÷Ÿ–ûÿÿÿÿ8¦¦éÛÄ1

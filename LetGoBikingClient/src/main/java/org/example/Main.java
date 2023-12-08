@@ -88,8 +88,8 @@ public class Main {
 //                origin = originField.getText();
 //                destination = destinationField.getText();
 
-                origin = "4 Rue de Paris, 69210 L'Arbresle";
-                destination = "30 Rue Marchande, 38200 Vienne";
+                origin = "20 Av. Albert Einstein, 69100 Villeurbanne";
+                destination = "6 Av. Georges Clemenceau, 69230 Saint-Genis-Laval";
 
                 // Vous pouvez initialiser vos variables ici
                 System.out.println("Origin: " + origin + ", Destination: " + destination);
@@ -219,7 +219,7 @@ public class Main {
                         // Supprimez également les coordonnées géographiques correspondantes
                         try{
                             int nbWaypointsToDelete = steps.get(0).getWayPoints().getValue().getInt().get(1)
-                                    - steps.get(0).getWayPoints().getValue().getInt().get(0) + 1;
+                                    - steps.get(0).getWayPoints().getValue().getInt().get(0);
                             for (int j=0; j<nbWaypointsToDelete; j++) {
                                 List<ArrayOfdouble> coordinates = features.get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble();
                                 if (!coordinates.isEmpty() && coordinates.size()>2) {
@@ -230,7 +230,9 @@ public class Main {
                                 }
                             }
                         } catch (Exception e) {
-                            System.out.println("No waypoints to delete");
+                            response.remove(0);
+                            refreshRouteDisplay(mapViewer, response);
+                            return;
                         }
 
 

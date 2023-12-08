@@ -5,6 +5,7 @@ using ProxyCacheSOAP.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -85,66 +86,66 @@ namespace LetGoBikingService.Services
                 Console.WriteLine($"Station la plus proche de l'addresse de destination : {stationNearestDestination.name}");
             }
 
-            bool WithOrWithoutBike = isItWorthToUseStations(stationsSelected, coordinateOrigin, coordinateDestination);
-            Console.WriteLine($"Is it worth to use them ? {WithOrWithoutBike}");
-
-            List<Itinary> itineraire = await ComputeItinary(WithOrWithoutBike);
+            List<Itinary> itineraire = await ComputeItinary();
             return itineraire;
         }
 
-        private async Task<List<Itinary>> ComputeItinary(bool withOrWithoutBike)
+        private async Task<List<Itinary>> ComputeItinary()
         {
-            List<Itinary> itinaries = new List<Itinary>();
 
-            if (withOrWithoutBike && stationsSelected.Count >= 2)
+            if (stationsSelected.Count >= 2)
             {
+                List<Itinary> itinariesWithBiking = new List<Itinary>();
+                List<Itinary> itinariesOnlyWalking = new List<Itinary>();
+
+                double durationWithBiking = 0;
+                double durationOnlyWalking = 0;
+
                 // Calculer l'itinéraire à pied jusqu'à la première station
                 Itinary walkToFirstStation = await OpenRouteAPI.GetDirections(coordinateOrigin, stationsSelected.First().position, "foot-walking");
-                itinaries.Add(walkToFirstStation);
-
+                itinariesWithBiking.Add(walkToFirstStation);
+                durationWithBiking += walkToFirstStation.Features.First().Properties.Segments.First().Duration;
 
                 // Calculer l'itinéraire à vélo entre les deux stations
                 Itinary bikeRoute = await OpenRouteAPI.GetDirections(stationsSelected.First().position, stationsSelected.Last().position, "cycling-regular");
-                itinaries.Add(bikeRoute);
-
+                itinariesWithBiking.Add(bikeRoute);
+                durationWithBiking+=bikeRoute.Features.First().Properties.Segments.First().Duration;
 
                 // Calculer l'itinéraire à pied de la dernière station à la destination
                 Itinary walkToDestination = await OpenRouteAPI.GetDirections(stationsSelected.Last().position, coordinateDestination, "foot-walking");
-                itinaries.Add(walkToDestination);
+                itinariesWithBiking.Add(walkToDestination);
+                durationWithBiking += walkToDestination.Features.First().Properties.Segments.First().Duration;
 
 
-                // Combinez ces segments pour former un itinéraire complet
-                Itinary combinedItinary = CombineItinaries(itinaries);
+                // Itinéraire à pied complet
+                Itinary itinaryOnlyWalking = await OpenRouteAPI.GetDirections(coordinateOrigin, coordinateDestination, "foot-walking");
+                itinariesOnlyWalking.Add(itinaryOnlyWalking);
+                durationOnlyWalking += itinaryOnlyWalking.Features.First().Properties.Segments.First().Duration;
 
-                await activeMQService.SendItineraryStepsToQueue(itinaries);
+                Console.WriteLine(durationOnlyWalking + " " + durationWithBiking);
 
-                return itinaries;
+                return (durationOnlyWalking < durationWithBiking) ? itinariesOnlyWalking : itinariesWithBiking;
             }
             else
             {
+                List<Itinary> itinariesOnlyWalking = new List<Itinary>();
                 // Itinéraire à pied complet si le vélo n'est pas une option valable
                 Itinary it = await OpenRouteAPI.GetDirections(coordinateOrigin, coordinateDestination, "foot-walking");
-                itinaries.Add(it);
-                return itinaries;
+                itinariesOnlyWalking.Add(it);
+                return itinariesOnlyWalking;
             }
         }
 
-        public static Itinary CombineItinaries(List<Itinary> itinaries)
-        {
-            Itinary combinedItinary = new Itinary { Features = new List<Feature>() };
 
-            foreach (Itinary itinary in itinaries)
-            {
-                foreach (Feature feature in itinary.Features)
+        /*        private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
                 {
-                    // Ajouter les caractéristiques de chaque itinéraire dans l'itinéraire combiné
-                    combinedItinary.Features.Add(feature);
-                }
-            }
+                    if (stations.Count < 2) return false;
 
-            return combinedItinary;
-        }
+                    double distanceWithStations = locationService.GetDistanceTo(stations.First().position, coordinateOrigin) +
+                                                  locationService.GetDistanceTo(stations.Last().position, coordinateDestination);
 
+                    return distanceWithStations < locationService.GetDistanceTo(coordinateOrigin, coordinateDestination);
+                }*/
 
         private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
         {

@@ -6,15 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b2f34e51-9013-4bb3-b63b-1a6a3a508450" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/b/0ba1b9c7a4878802f938e331cc2d8a042087ec6b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/b/0ba1b9c7a4878802f938e331cc2d8a042087ec6b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/5/25fcf0d16e8f4fca989cfe227c2d84c60a5663c8" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/5/25fcf0d16e8f4fca989cfe227c2d84c60a5663c8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/5/5580dbfabbbb2ce85d7a4b1e16fff9d50c036bb7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/5/5580dbfabbbb2ce85d7a4b1e16fff9d50c036bb7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MessageViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MessageViewer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LetGoBikingService/.vs/LetGoBikingService/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../LetGoBikingService/.vs/LetGoBikingService/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProxyCacheSOAP/ProxyCacheSOAP/Service/ProxyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProxyCacheSOAP/ProxyCacheSOAP/Service/ProxyService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LetGoBikingService/LetGoBikingService/Services/RouteService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../LetGoBikingService/LetGoBikingService/Services/RouteService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LetGoBikingService/LetGoBikingService/obj/Debug/LetGoBikingService.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../LetGoBikingService/LetGoBikingService/obj/Debug/LetGoBikingService.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,26 +50,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ajoutProxyCache&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/louis/Bureau/LetGoBikingService/LetGoBikingClient/src/main/java/org/example&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "ajoutActiveMQ",
+    "last_opened_file_path": "C:/Users/louis/Bureau/LetGoBikingService/LetGoBikingClient/src/main/java/org/example",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.example" />
@@ -192,7 +188,7 @@
       <workItem from="1701942241389" duration="7331000" />
       <workItem from="1702027126341" duration="107000" />
       <workItem from="1702027318848" duration="100000" />
-      <workItem from="1702042758473" duration="19466000" />
+      <workItem from="1702042758473" duration="22808000" />
     </task>
     <servers />
   </component>
@@ -216,12 +212,7 @@
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>183</line>
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
