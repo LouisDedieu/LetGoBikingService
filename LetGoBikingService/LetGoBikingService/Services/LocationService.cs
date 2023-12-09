@@ -11,6 +11,8 @@ namespace LetGoBikingService.Services
 {
     public class LocationService
     {
+        private readonly string FOOTWALKING = "foot-walking";
+        private readonly int numberOfNearestStation = 5;
         private double R = 6371e3;
 
         public Contract FindNearestContract(CoordinateNominatim addressCoordinate, Contract[] contracts, List<CoordinateNominatim> contractsCoordinates)
@@ -34,24 +36,30 @@ namespace LetGoBikingService.Services
             return nearestContract;
         }
 
-        public Station FindNearestStation(CoordinateNominatim addressCoordinate, Station[] stationsNearestaddressCoordinate)
+        public async Task<Station> FindNearestStation(CoordinateNominatim coordinate, Station[] stations)
         {
+            var nearestStationList = stations
+                .Select(station => new { Station = station, Distance = GetDistanceTo(station.position, coordinate) })
+                .OrderBy(result => result.Distance)
+                .Take(numberOfNearestStation)
+                .Select(result => result.Station)
+                .ToList();
+
+            double minDuration = double.MaxValue;
             Station nearestStation = null;
-            double minDistance = double.MaxValue;
-
-            foreach (Station station in stationsNearestaddressCoordinate)
+            foreach (Station station in nearestStationList)
             {
-                Position stationCoordinates = station.position;
-
-                double distance = GetDistanceTo(stationCoordinates, addressCoordinate);
-                if (distance < minDistance && station.available_bikes > 0)
+                CoordinateNominatim stationCoord = Utils.Utils.ConvertPositionToCoordinateNominatim(station.position);
+               double duration = await OpenRouteAPI.GetDurationOnly(coordinate, stationCoord, FOOTWALKING);
+                if (duration < minDuration)
                 {
-                    minDistance = distance;
+                    minDuration = duration;
                     nearestStation = station;
                 }
             }
             return nearestStation;
         }
+
 
         public double GetDistanceTo(Position positionStart, CoordinateNominatim coordinateDestination)
         {

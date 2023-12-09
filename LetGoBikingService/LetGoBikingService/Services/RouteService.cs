@@ -77,13 +77,13 @@ namespace LetGoBikingService.Services
 
             if (stationsNearestOrigin.Count() != 0)
             {
-                Station stationNearestOrigin = locationService.FindNearestStation(coordinateOrigin, stationsNearestOrigin);
+                Station stationNearestOrigin = await locationService.FindNearestStation(coordinateOrigin, stationsNearestOrigin);
                 stationsSelected.Add(stationNearestOrigin);
                 Console.WriteLine($"Station la plus proche de l'addresse d'origine : {stationNearestOrigin.name}");
             }
             if (stationsNearestDestination.Count() != 0)
             {
-                Station stationNearestDestination = locationService.FindNearestStation(coordinateDestination, stationsNearestDestination);
+                Station stationNearestDestination = await locationService.FindNearestStation(coordinateDestination, stationsNearestDestination);
                 stationsSelected.Add(stationNearestDestination);
                 Console.WriteLine($"Station la plus proche de l'addresse de destination : {stationNearestDestination.name}");
             }
