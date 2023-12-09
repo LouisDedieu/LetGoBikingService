@@ -4,6 +4,7 @@ using LetGoBikingService.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetGoBikingService.Services
@@ -18,7 +19,8 @@ namespace LetGoBikingService.Services
                 using (IConnection connection = factory.CreateConnection())
                 using (Apache.NMS.ISession session = connection.CreateSession())
                 {
-                    IDestination destination = session.GetQueue("ItineraryQueue");
+                    string queueName = itinaries.First().metadata.uuid;
+                    IDestination destination = session.GetQueue(queueName);
                     using (IMessageProducer producer = session.CreateProducer(destination))
                     {
                         foreach (var itinary in itinaries)

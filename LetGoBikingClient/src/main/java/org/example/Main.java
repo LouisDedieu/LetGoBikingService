@@ -234,8 +234,6 @@ public class Main {
                             refreshRouteDisplay(mapViewer, response);
                             return;
                         }
-
-
                     } else {
                         segments.remove(0); // Si pas de steps, supprimez le Segment entier
                     }

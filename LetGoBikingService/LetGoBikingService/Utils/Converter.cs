@@ -52,11 +52,5 @@ namespace LetGoBikingService.Utils
                 }
             }
         }
-        public static void setProfile(Itinary itinary)
-        {
-
-        }
-
-
     }
 }

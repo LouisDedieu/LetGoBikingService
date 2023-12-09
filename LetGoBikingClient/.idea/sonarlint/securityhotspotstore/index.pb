@@ -17,3 +17,5 @@ Y
 )src/main/java/org/example/MapManager.java,1\f\1f16fa3d95412de356d75863ae2e2e53b0ac691e
 N
 src/main/java/org/example/text,7\b\7b7d7a142ead63fc1209d24c597ae9e8f0bab467
+h
+8src/main/java/com/soap/ws/client/generated/Metadata.java,b\c\bca27357ba553d8dac7012ceff1ff01d7c58f909

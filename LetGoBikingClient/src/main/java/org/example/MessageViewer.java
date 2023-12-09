@@ -32,7 +32,8 @@ public class MessageViewer {
             Connection connection = factory.createConnection();
             connection.start();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Queue queue = session.createQueue("ItineraryQueue");
+            String queueName = Main.getResponse().get(0).getMetadata().getValue().getUuid().getValue();
+            Queue queue = session.createQueue(queueName);
 
             consumer = session.createConsumer(queue);
 

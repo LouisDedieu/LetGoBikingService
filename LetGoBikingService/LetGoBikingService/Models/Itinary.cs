@@ -12,6 +12,7 @@ namespace LetGoBikingService.Models
     }
     public class Metadata
     {
+        public string uuid { get; set; }
         public Query query { get; set; }
     }
 

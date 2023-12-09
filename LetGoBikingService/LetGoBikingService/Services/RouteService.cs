@@ -31,7 +31,7 @@ namespace LetGoBikingService.Services
 
         private ProxyServiceClient proxyServiceClient = new ProxyServiceClient();
         private GenericProxyCache<List<Itinary>> itinaryCache = new GenericProxyCache<List<Itinary>>();
-        private readonly double itinaryExpirationTime = 10080; //10080min = 1 week
+        private readonly double itinaryExpirationTime = 60; //60 min
 
 
         public RouteService()
@@ -44,6 +44,10 @@ namespace LetGoBikingService.Services
 
             string cacheKey = $"Itinerary-{origin}-{destination}";
             List<Itinary> it = itinaryCache.Get(cacheKey, () => GetItineraryImpl(origin, destination).Result, itinaryExpirationTime);
+
+            Guid newGuid = Guid.NewGuid();
+            it.First().metadata.uuid = newGuid.ToString("N");
+
             await activeMQService.SendItineraryStepsToQueue(it);
             return it;
 
@@ -59,8 +63,6 @@ namespace LetGoBikingService.Services
                 CoordinateNominatim coordNom = await OpenStreetMapAPI.GetCoordinates(contract.name);
                 contractsCoordinates.Add(coordNom);
             }
-
-            //proxyServiceClient.setContractService(contracts, contractsCoordinates);
 
             coordinateOrigin = await OpenStreetMapAPI.GetCoordinates(origin);
             coordinateDestination = await OpenStreetMapAPI.GetCoordinates(destination);

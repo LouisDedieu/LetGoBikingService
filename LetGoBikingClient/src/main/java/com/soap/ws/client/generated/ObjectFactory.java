@@ -70,6 +70,7 @@ public class ObjectFactory {
     private final static QName _GetItineraryResponseGetItineraryResult_QNAME = new QName("http://tempuri.org/", "GetItineraryResult");
     private final static QName _QueryProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "profile");
     private final static QName _MetadataQuery_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "query");
+    private final static QName _MetadataUuid_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "uuid");
     private final static QName _GeometryCoordinates_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "coordinates");
     private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Instruction");
     private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", "Name");
@@ -775,6 +776,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "query", scope = Metadata.class)
     public JAXBElement<Query> createMetadataQuery(Query value) {
         return new JAXBElement<Query>(_MetadataQuery_QNAME, Query.class, Metadata.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/LetGoBikingService.Models", name = "uuid", scope = Metadata.class)
+    public JAXBElement<String> createMetadataUuid(String value) {
+        return new JAXBElement<String>(_MetadataUuid_QNAME, String.class, Metadata.class, value);
     }
 
     /**
