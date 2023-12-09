@@ -1,6 +1,7 @@
 package org.example;
 
 import com.soap.ws.client.generated.*;
+import org.jxmapviewer.JXMapKit;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.CenterMapListener;
@@ -29,7 +30,7 @@ public class MapManager {
     private List<Itinary> response = null;
     private List<GeoPosition> track = null;
     public MapManager() {
-        mapViewer = new JXMapViewer();
+        mapViewer = new JXMapKit().getMainMap();
     }
 
     // Main method to create and show the map
@@ -86,7 +87,7 @@ public class MapManager {
         mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
         centerButton.addActionListener(e -> {
             // Ask for a new origin and destination
-            clientInputManager.askOriginAndDestination(routeServiceClient, this);
+            Main.main(null);
             frame.setVisible(false);
         });
         frame.setVisible(true);
