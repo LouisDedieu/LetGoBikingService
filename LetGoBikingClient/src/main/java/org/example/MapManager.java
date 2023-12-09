@@ -19,6 +19,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.example.Main.clientInputManager;
+import static org.example.Main.routeServiceClient;
+
 public class MapManager {
     private JXMapViewer mapViewer;
     private static final String WALKING = "foot-walking" ;
@@ -32,7 +35,7 @@ public class MapManager {
     // Fonction principale pour créer et montrer la carte
     void createAndShowMap(List<Itinary> itinary) throws JMSException {
         response = itinary;
-        JXMapViewer mapViewer = initializeMapViewer(itinary);
+        mapViewer = initializeMapViewer(itinary);
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         setupUI(mapViewer, textArea);
@@ -54,7 +57,6 @@ public class MapManager {
         mapViewer.requestFocusInWindow();
 
         addRouteToMap(mapViewer, itinary);
-        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
         return mapViewer;
     }
 
@@ -67,10 +69,25 @@ public class MapManager {
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(250);
 
+        // Créer le bouton de centrage
+        JButton centerButton = new JButton("Nouvelle Recherche");
+
+        // Panel pour contenir le bouton
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BorderLayout());
+        bottomPanel.add(centerButton, BorderLayout.CENTER);
+
+        // Créer et configurer la fenêtre principale
         JFrame frame = new JFrame("JXMapViewer2 - Interactive Map Viewer");
         frame.getContentPane().add(splitPane, BorderLayout.CENTER);
+        frame.getContentPane().add(bottomPanel, BorderLayout.SOUTH); // Ajouter le panel du bouton en bas
         frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
+        centerButton.addActionListener(e -> {
+            clientInputManager.askOriginAndDestination(routeServiceClient, this);
+            frame.setVisible(false);
+        });
         frame.setVisible(true);
     }
 
@@ -79,7 +96,6 @@ public class MapManager {
         List<RoutePainter> routePainters = new ArrayList<RoutePainter>();
         Color c = Color.RED;
         Set<Waypoint> waypoints = new HashSet<Waypoint>();
-
         for (Itinary itinary : itinaries) {
             track = new ArrayList<GeoPosition>();
             ArrayOfFeature arrayOfFeature = itinary.getFeatures().getValue();

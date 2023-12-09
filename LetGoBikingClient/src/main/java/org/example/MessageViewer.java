@@ -22,7 +22,7 @@ public class MessageViewer {
     public JPanel createMessagePanel(JTextArea textArea) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JScrollPane(textArea), BorderLayout.CENTER);
-        JButton button = new JButton("Get Next Messages");
+        JButton button = new JButton("Get Next Instructions");
         panel.add(button, BorderLayout.SOUTH);
 
         try {
