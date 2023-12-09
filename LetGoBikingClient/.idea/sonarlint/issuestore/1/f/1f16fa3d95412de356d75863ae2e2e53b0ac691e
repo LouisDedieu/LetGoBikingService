@@ -1,8 +1,21 @@
 
+{
+java:S22939"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘Ÿ„µÿÿÿÿÿ8„ÊèùÄ1
+{
+java:S2293O"YReplace the type specification in this constructor call with the diamond operator ("<>").(½Ïüìûÿÿÿÿ8±ñåùÄ1
 v
-java:S2293l"YReplace the type specification in this constructor call with the diamond operator ("<>").(ì‡†8¬ŸşÍÄ1
+java:S2293Q"YReplace the type specification in this constructor call with the diamond operator ("<>").(‹®Çº8²ñåùÄ1
+v
+java:S2293T"YReplace the type specification in this constructor call with the diamond operator ("<>").(ª­¿Ñ8õ êùÄ1
+v
+java:S2293j"YReplace the type specification in this constructor call with the diamond operator ("<>").(ùûÛ©8²ñåùÄ1
+v
+java:S2293q"YReplace the type specification in this constructor call with the diamond operator ("<>").(¯ü¾³8²ñåùÄ1
+_
+java:S1117#"=Rename "mapViewer" which hides the field declared at line 23.(÷€®âıÿÿÿÿ8ßéèùÄ1
+Œ
+java:S1130>"oRemove the declaration of thrown exception 'javax.jms.JMSException', as it cannot be thrown from method's body.(¶ÛóÉ8Ï¥¨úÄ1
 f
-java:S3252>"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8‹…ŸªÄ1
+java:S3252I"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8ÅñåùÄ1
 t
-java:S3776B"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(èô¦ğıÿÿÿÿ8±ÓíÍÄ1
-G	java:S106V"+Replace this use of System.err by a logger.(¿±Ã…8ßÓíÍÄ1
+java:S3776u"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(û£¤Òÿÿÿÿÿ8ĞñåùÄ1
