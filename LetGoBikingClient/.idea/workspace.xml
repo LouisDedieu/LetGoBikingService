@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2f34e51-9013-4bb3-b63b-1a6a3a508450" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FIR2gXqXEAEwhd4.jpeg" beforeDir="false" />
-    </list>
+    <list default="true" id="b2f34e51-9013-4bb3-b63b-1a6a3a508450" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +29,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -52,7 +50,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ajoutActiveMQ&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/louis/Bureau/LetGoBikingService/LetGoBikingClient/src/main/java/org/example&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -178,7 +176,13 @@
       <workItem from="1701374943596" duration="4810000" />
       <workItem from="1701443493053" duration="2257000" />
       <workItem from="1701462975867" duration="51000" />
-      <workItem from="1701467274094" duration="392000" />
+      <workItem from="1701467274094" duration="994000" />
+      <workItem from="1701849196926" duration="3950000" />
+      <workItem from="1701942241389" duration="7331000" />
+      <workItem from="1702027126341" duration="107000" />
+      <workItem from="1702027318848" duration="100000" />
+      <workItem from="1702042758473" duration="31676000" />
+      <workItem from="1702136810645" duration="6687000" />
     </task>
     <servers />
   </component>
@@ -191,5 +195,20 @@
     <option featureType="dependencySupport" implementationName="java:org.openjfx:javafx-base" />
     <option featureType="dependencySupport" implementationName="executable:kubectl" />
     <option featureType="dependencySupport" implementationName="java:jakarta.xml.ws:jakarta.xml.ws-api" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.soap.ws.client.generated.ArrayOfint" memberName="_int" />
+        <PinnedItemInfo parentTag="com.soap.ws.client.generated.ArrayOfArrayOfdouble" memberName="arrayOfdouble" />
+        <PinnedItemInfo parentTag="com.soap.ws.client.generated.ArrayOfFeature" memberName="feature" />
+        <PinnedItemInfo parentTag="com.soap.ws.client.generated.ArrayOfStep" memberName="step" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="itinary.features.value.feature.get(0)" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

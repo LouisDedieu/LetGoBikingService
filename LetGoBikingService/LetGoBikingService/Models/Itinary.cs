@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace LetGoBikingService.Models
 {
@@ -12,6 +9,7 @@ namespace LetGoBikingService.Models
     }
     public class Metadata
     {
+        public string uuid { get; set; }
         public Query query { get; set; }
     }
 

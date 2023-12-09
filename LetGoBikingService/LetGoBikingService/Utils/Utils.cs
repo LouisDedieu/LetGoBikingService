@@ -1,14 +1,12 @@
 ﻿using LetGoBikingService.Models;
-using Newtonsoft.Json;
+using LetGoBikingService.ServiceReference1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LetGoBikingService.Utils
 {
-    public class Converter
+    public class Utils
     {
         public static void PopulateStepCoordinates(Itinary itinary)
         {
@@ -52,11 +50,10 @@ namespace LetGoBikingService.Utils
                 }
             }
         }
-        public static void setProfile(Itinary itinary)
+        public static CoordinateNominatim ConvertPositionToCoordinateNominatim(Position position)
         {
-
+            return new CoordinateNominatim(Convert.ToString(position.longitude).Replace(',', '.'), 
+                                            Convert.ToString(position.latitude).Replace(',', '.'));
         }
-
-
     }
 }
