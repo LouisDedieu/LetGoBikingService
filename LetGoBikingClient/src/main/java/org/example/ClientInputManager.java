@@ -57,17 +57,24 @@ public class ClientInputManager {
             String origin = originField.getText();
             String destination = destinationField.getText();
 
-            System.out.println("Origin: " + origin + ", Destination: " + destination);
-            frame.setVisible(false);
+            if (origin.isEmpty() || destination.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Please fill in both origin and destination");
+                return;
+            }
+            else {
+                System.out.println("Origin: " + origin + ", Destination: " + destination);
+                frame.setVisible(false);
 
-            List<Itinary> response = routeServiceClient.getItinerary(origin, destination).getItinary();
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    mapManager.createAndShowMap(response);
-                } catch (Exception ex) {
-                    throw new RuntimeException("Error while creating map");
-                }
-            });
+                List<Itinary> response = routeServiceClient.getItinerary(origin, destination).getItinary();
+                SwingUtilities.invokeLater(() -> {
+                    try {
+                        mapManager.createAndShowMap(response);
+                    } catch (Exception ex) {
+                        throw new RuntimeException("Error while creating map");
+                    }
+                });
+            }
+
         });
     }
 }
