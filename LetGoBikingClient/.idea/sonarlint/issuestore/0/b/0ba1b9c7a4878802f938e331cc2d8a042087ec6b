@@ -1,9 +1,0 @@
-
-€
-java:S1104"^Make routeServiceClient a static final constant or non-public and provide accessors if needed.(¢¸øÿÿÿÿ8¶‹š‚Å1
-€
-java:S1104"^Make clientInputManager a static final constant or non-public and provide accessors if needed.(ÔÌÃøÿÿÿÿ8ö½‚Å1
-Z
-java:S1444"8Make this "public static routeServiceClient" field final(¢¸øÿÿÿÿ8·‹š‚Å1
-Z
-java:S1444"8Make this "public static clientInputManager" field final(ÔÌÃøÿÿÿÿ8ö½‚Å1

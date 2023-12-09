@@ -1,9 +1,0 @@
-
-g	java:S112D"FDefine and throw a dedicated exception instead of using a generic one.(Ä¶ØŒıÿÿÿÿ8Êê„ƒÅ1
-
-java:S1450"_Remove the "destinationField" field and declare it as a local variable in the relevant methods.(¨ÆÌŒüÿÿÿÿ8Ùê„ƒÅ1
-w
-java:S1450"ZRemove the "originField" field and declare it as a local variable in the relevant methods.(¾Ñ¿Õ8Úê„ƒÅ1
-f
-java:S3252"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8Üê„ƒÅ1
-G	java:S106<"+Replace this use of System.out by a logger.(Ø‚œ½8åê„ƒÅ1
