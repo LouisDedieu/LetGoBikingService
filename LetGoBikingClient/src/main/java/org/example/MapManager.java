@@ -32,7 +32,7 @@ public class MapManager {
         mapViewer = new JXMapViewer();
     }
 
-    // Fonction principale pour créer et montrer la carte
+    // Main method to create and show the map
     void createAndShowMap(List<Itinary> itinary) throws JMSException {
         response = itinary;
         mapViewer = initializeMapViewer(itinary);
@@ -41,7 +41,7 @@ public class MapManager {
         setupUI(mapViewer, textArea);
     }
 
-    // Initialisation et configuration de JXMapViewer
+    // Initialize the map viewer
     private JXMapViewer initializeMapViewer(List<Itinary> itinary) {
         OSMTileFactoryInfo info = new OSMTileFactoryInfo();
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
@@ -60,7 +60,7 @@ public class MapManager {
         return mapViewer;
     }
 
-    // Configuration de l'interface utilisateur
+    // Set up the UI
     private void setupUI(JXMapViewer mapViewer, JTextArea textArea) throws JMSException {
         MessageViewer messageViewer = new MessageViewer(this);
         JPanel messagePanel = messageViewer.createMessagePanel(textArea);
@@ -69,15 +69,15 @@ public class MapManager {
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(250);
 
-        // Créer le bouton de centrage
+        // Create a button
         JButton centerButton = new JButton("Nouvelle Recherche");
 
-        // Panel pour contenir le bouton
+        // Panel to hold the button
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
         bottomPanel.add(centerButton, BorderLayout.CENTER);
 
-        // Créer et configurer la fenêtre principale
+        // Create the main frame
         JFrame frame = new JFrame("JXMapViewer2 - Interactive Map Viewer");
         frame.getContentPane().add(splitPane, BorderLayout.CENTER);
         frame.getContentPane().add(bottomPanel, BorderLayout.SOUTH); // Ajouter le panel du bouton en bas
@@ -85,6 +85,7 @@ public class MapManager {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
         centerButton.addActionListener(e -> {
+            // Ask for a new origin and destination
             clientInputManager.askOriginAndDestination(routeServiceClient, this);
             frame.setVisible(false);
         });
@@ -92,10 +93,10 @@ public class MapManager {
     }
 
     void addRouteToMap(JXMapViewer mapViewer, List<Itinary> itinaries) {
-        // Liste pour stocker les positions Geo
-        List<RoutePainter> routePainters = new ArrayList<RoutePainter>();
-        Color c = Color.RED;
-        Set<Waypoint> waypoints = new HashSet<Waypoint>();
+        List<RoutePainter> routePainters = new ArrayList<RoutePainter>(); // RoutePainter list to store all the routes
+        Color c = Color.RED; // Color of the route by default
+        Set<Waypoint> waypoints = new HashSet<Waypoint>(); // Waypoint set to store all the important waypoints
+
         for (Itinary itinary : itinaries) {
             track = new ArrayList<GeoPosition>();
             ArrayOfFeature arrayOfFeature = itinary.getFeatures().getValue();
@@ -113,6 +114,7 @@ public class MapManager {
             else if (itinary.getMetadata().getValue().getQuery().getValue().getProfile().getValue().equals(CYCLING))
                 c = Color.RED;
 
+            // Create a track from the geo-positions
             RoutePainter routePainter = new RoutePainter(track, c);
             routePainters.add(routePainter);
         }
@@ -135,7 +137,7 @@ public class MapManager {
 
         int i = 0;
         while (i < messagesConsumed && !response.isEmpty()) {
-            Itinary firstItinary = response.get(0); // Obtenez le premier Itinary
+            Itinary firstItinary = response.get(0);
             List<Feature> features = firstItinary.getFeatures().getValue().getFeature();
 
             if (!features.isEmpty()) {
@@ -147,17 +149,17 @@ public class MapManager {
                     List<Step> steps = firstSegment.getSteps().getValue().getStep();
 
                     if (!steps.isEmpty()) {
-                        // Supprimez la première step
+                        // Remove the first step
                         steps.remove(0);
 
-                        // Supprimez également les coordonnées géographiques correspondantes
+                        // Remove the coordinates corresponding to the first step
                         try{
                             int nbWaypointsToDelete = steps.get(0).getWayPoints().getValue().getInt().get(1)
                                     - steps.get(0).getWayPoints().getValue().getInt().get(0);
                             for (int j=0; j<nbWaypointsToDelete; j++) {
                                 List<ArrayOfdouble> coordinates = features.get(0).getGeometry().getValue().getCoordinates().getValue().getArrayOfdouble();
                                 if (!coordinates.isEmpty() && coordinates.size()>2) {
-                                    coordinates.remove(0); // Supprimez la coordonnée correspondante
+                                    coordinates.remove(0); // Remove the first coordinate
                                 }
                                 else {
                                     break;
@@ -169,19 +171,19 @@ public class MapManager {
                             return;
                         }
                     } else {
-                        segments.remove(0); // Si pas de steps, supprimez le Segment entier
+                        segments.remove(0); // If no steps, remove the Segment entirely
                     }
                 } else {
-                    features.remove(0); // Si pas de segments, supprimez la Feature entière
+                    features.remove(0); // If no segments, remove the Feature entirely
                 }
             } else {
-                response.remove(0); // Si pas de features, supprimez l'Itinary entier
+                response.remove(0); // If no features, remove the Itinary entirely
             }
 
-            i++; // Incrémente i après chaque itération
+            i++;
         }
 
-        // Après la mise à jour des itinéraires, rafraîchir l'affichage de la carte
+        // After removing the first step, refresh the map
         refreshRouteDisplay(mapViewer, response);
     }
 
@@ -189,13 +191,13 @@ public class MapManager {
 
 
     public void refreshRouteDisplay(JXMapViewer mapViewer, List<Itinary> itinaries) {
-        // Effacez les anciens itinéraires
+        // Remove the old itinerary
         mapViewer.setOverlayPainter(null);
 
-        // Reconstruisez track et ajoutez les nouveaux itinéraires
+        // Rebuid the map with the new itinerary
         addRouteToMap(mapViewer, itinaries);
 
-        // Redessiner la carte
+        // Redraw the map
         mapViewer.repaint();
     }
 

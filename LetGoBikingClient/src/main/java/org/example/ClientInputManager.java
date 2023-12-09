@@ -21,15 +21,15 @@ public class ClientInputManager {
     }
 
     public void askOriginAndDestination(IRouteService routeServiceClient, MapManager mapManager) {
-        /// Ajouter les composants
+        //Add components to the frame
         addComponents(routeServiceClient, mapManager);
 
-        // Afficher la fenêtre
+        //Display the window.
         frame.setVisible(true);
     }
 
     private void addComponents(IRouteService routeServiceClient, MapManager mapManager) {
-        // Créer les labels
+        // Create the labels
         JLabel originLabel = new JLabel("Origin:");
         originLabel.setBounds(10, 20, 80, 25);
         frame.add(originLabel);
@@ -38,7 +38,7 @@ public class ClientInputManager {
         destinationLabel.setBounds(10, 50, 80, 25);
         frame.add(destinationLabel);
 
-        // Créer les champs de texte
+        // Create the text fields
         originField = new JTextField(20);
         originField.setBounds(100, 20, 165, 25);
         frame.add(originField);
@@ -47,17 +47,15 @@ public class ClientInputManager {
         destinationField.setBounds(100, 50, 165, 25);
         frame.add(destinationField);
 
-        // Créer le bouton
+        // Create the submit button
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(100, 80, 80, 25);
         frame.add(submitButton);
 
-        // Ajouter l'action du bouton
+        // Add the action listener
         submitButton.addActionListener((ActionEvent e) -> {
-            //String origin = originField.getText();
-            //String destination = destinationField.getText();
-            String origin = "58 Rue Pierre Bouvier, 69270 Fontaines-sur-Saône";
-            String destination = "70 Av. Georges Clemenceau, 69230 Saint-Genis-Laval";
+            String origin = originField.getText();
+            String destination = destinationField.getText();
 
             System.out.println("Origin: " + origin + ", Destination: " + destination);
             frame.setVisible(false);
@@ -67,7 +65,7 @@ public class ClientInputManager {
                 try {
                     mapManager.createAndShowMap(response);
                 } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    throw new RuntimeException("Error while creating map");
                 }
             });
         });

@@ -12,8 +12,8 @@ import java.awt.*;
 
 public class MessageViewer {
 
-    private MessageConsumer consumer;
     private MapManager mapManager;
+    private static final String BROKER_URL = "tcp://localhost:61616";
 
     public MessageViewer(MapManager mapManager) {
         this.mapManager = mapManager;
@@ -35,8 +35,8 @@ public class MessageViewer {
     }
 
     private void setupActiveMQConnection(JTextArea textArea, JButton button) throws JMSException {
-        // Configuration de la connexion ActiveMQ
-        ConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        // ActiveMQ configuration
+        ConnectionFactory factory = new ActiveMQConnectionFactory(BROKER_URL);
         Connection connection = factory.createConnection();
         connection.start();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -66,7 +66,8 @@ public class MessageViewer {
                 mapManager.refreshMap(messagesConsumed);
             } else {
                 textArea.append("Aucun nouveau message à traiter.\n");
-                mapManager.refreshMap(1);
+                if(!mapManager.getResponse().isEmpty())
+                    mapManager.refreshMap(10);
             }
         } catch (JMSException ex) {
             textArea.append("Erreur lors de la réception des messages.\n");

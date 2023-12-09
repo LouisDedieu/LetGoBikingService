@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LetGoBikingService.Services
@@ -50,8 +49,8 @@ namespace LetGoBikingService.Services
             foreach (Station station in nearestStationList)
             {
                 CoordinateNominatim stationCoord = Utils.Utils.ConvertPositionToCoordinateNominatim(station.position);
-               double duration = await OpenRouteAPI.GetDurationOnly(coordinate, stationCoord, FOOTWALKING);
-                if (duration < minDuration)
+                double duration = await OpenRouteAPI.GetDurationOnly(coordinate, stationCoord, FOOTWALKING);
+                if (duration < minDuration && station.available_bikes>0)
                 {
                     minDuration = duration;
                     nearestStation = station;

@@ -1,9 +1,5 @@
 
-Ñ
-java:S5301'"®Secure this "ActiveMQConnectionFactory" by whitelisting the trusted packages using the "setTrustedPackages" method and make sure the "setTrustAllPackages" is not set to true.(êÎ ùùÿÿÿÿ8ùïúúÄ1
-^
-java:S1117-"<Rename "consumer" which hides the field declared at line 15.(º’¼Àÿÿÿÿÿ8ûïúúÄ1
+Ì
+java:S5301'"®Secure this "ActiveMQConnectionFactory" by whitelisting the trusted packages using the "setTrustedPackages" method and make sure the "setTrustAllPackages" is not set to true.(¯¶êË8ùïúúÄ1
 r
 java:S6201;"PReplace this instanceof check and cast with 'instanceof TextMessage textMessage'( ÎÃøÿÿÿÿ8şïúúÄ1
-I
-java:S1068",Remove this unused "consumer" private field.(¥×­ù8‡ğúúÄ1

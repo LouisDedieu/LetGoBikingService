@@ -1,6 +1,5 @@
 ﻿using ProxyCacheSOAP.Models;
 using ProxyCacheSOAP.Service;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

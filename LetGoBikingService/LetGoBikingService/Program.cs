@@ -3,13 +3,12 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using LetGoBikingService.Services;
 using LetGoBikingService.Interfaces;
-using System.Threading.Tasks;
 
 namespace LetGoBikingService
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             // Définir l'URL de base pour le service
             Uri baseAddressRoute = new Uri("http://localhost:8090/RouteService");

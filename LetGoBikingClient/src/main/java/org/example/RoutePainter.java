@@ -30,7 +30,7 @@ public class RoutePainter implements Painter<JXMapViewer>
      */
     public RoutePainter(List<GeoPosition> track, Color color)
     {
-        // copy the list so that changes in the
+        // Copy the list so that changes in the
         // original list do not have an effect here
         this.track = new ArrayList<GeoPosition>(track);
         this.color = color;
@@ -41,20 +41,20 @@ public class RoutePainter implements Painter<JXMapViewer>
     {
         g = (Graphics2D) g.create();
 
-        // convert from viewport to world bitmap
+        // Convert from viewport to world bitmap
         Rectangle rect = map.getViewportBounds();
         g.translate(-rect.x, -rect.y);
 
         if (antiAlias)
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // do the drawing
+        // Do the drawing
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(4));
 
         drawRoute(g, map);
 
-        // do the drawing again
+        // Do the drawing again
         g.setColor(color);
         g.setStroke(new BasicStroke(2));
 
@@ -76,7 +76,7 @@ public class RoutePainter implements Painter<JXMapViewer>
 
         for (GeoPosition gp : track)
         {
-            // convert geo-coordinate to world bitmap pixel
+            // Convert geo-coordinate to world bitmap pixel
             Point2D pt = map.getTileFactory().geoToPixel(gp, map.getZoom());
 
             if (first)

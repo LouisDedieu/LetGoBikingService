@@ -1,17 +1,15 @@
 ﻿using Apache.NMS;
-using Apache.NMS.ActiveMQ;
 using LetGoBikingService.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LetGoBikingService.Services
 {
     public class ActiveMQService
     {
-        public async Task<bool> SendItineraryStepsToQueue(List<Itinary> itinaries)
+        public bool SendItineraryStepsToQueue(List<Itinary> itinaries)
         {
             try
             {

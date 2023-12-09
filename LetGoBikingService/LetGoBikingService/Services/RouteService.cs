@@ -5,7 +5,6 @@ using ProxyCacheSOAP.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -48,7 +47,7 @@ namespace LetGoBikingService.Services
             Guid newGuid = Guid.NewGuid();
             it.First().metadata.uuid = newGuid.ToString("N");
 
-            await activeMQService.SendItineraryStepsToQueue(it);
+            activeMQService.SendItineraryStepsToQueue(it);
             return it;
 
         }
@@ -124,8 +123,6 @@ namespace LetGoBikingService.Services
                 itinariesOnlyWalking.Add(itinaryOnlyWalking);
                 durationOnlyWalking += itinaryOnlyWalking.Features.First().Properties.Segments.First().Duration;
 
-                Console.WriteLine(durationOnlyWalking + " " + durationWithBiking);
-
                 return (durationOnlyWalking < durationWithBiking) ? itinariesOnlyWalking : itinariesWithBiking;
             }
             else
@@ -136,27 +133,6 @@ namespace LetGoBikingService.Services
                 itinariesOnlyWalking.Add(it);
                 return itinariesOnlyWalking;
             }
-        }
-
-
-        /*        private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
-                {
-                    if (stations.Count < 2) return false;
-
-                    double distanceWithStations = locationService.GetDistanceTo(stations.First().position, coordinateOrigin) +
-                                                  locationService.GetDistanceTo(stations.Last().position, coordinateDestination);
-
-                    return distanceWithStations < locationService.GetDistanceTo(coordinateOrigin, coordinateDestination);
-                }*/
-
-        private bool isItWorthToUseStations(List<Station> stations, CoordinateNominatim coordinateOrigin, CoordinateNominatim coordinateDestination)
-        {
-            if (stations.Count < 2) return false;
-
-            double distanceWithStations = locationService.GetDistanceTo(stations.First().position, coordinateOrigin) +
-                                          locationService.GetDistanceTo(stations.Last().position, coordinateDestination);
-
-            return distanceWithStations < locationService.GetDistanceTo(coordinateOrigin, coordinateDestination);
         }
     }
 }
