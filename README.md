@@ -1,4 +1,4 @@
-# LetGoBiking - Instructions d'installation et de configuration
+# LetsGoBiking - Instructions d'installation et de configuration
 
 Ce document fournit des instructions détaillées pour installer et configurer l'environnement nécessaire pour exécuter le projet LetGoBiking.
 
